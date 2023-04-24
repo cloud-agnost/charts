@@ -1,4 +1,4 @@
-# Install Altogic Apps via Helm
+# Install Cloud Agnost Apps via Helm
 
 First make sure that you have helm installed [here](https://helm.sh/docs/intro/install/)
 
