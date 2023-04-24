@@ -47,6 +47,20 @@ base-cloud-agnost   <none>   *       192.168.49.2   80      5m8s
 
 Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
 
+### MicroK8s
+
+If you haven't done already, you need to enable ingress addon:
+
+```bash
+$> microk8s enable ingress
+```
+
+Then, you can reach your app via the Ingress IP address:
+
+```bash
+$> kubectl get ingress base-cloud-agnost
+```
+
 ### Docker Desktop
 
 If you already have docker desktop running and you're using the Kubernetes that is shipped with it:
@@ -61,19 +75,9 @@ If you already have docker desktop running and you're using the Kubernetes that 
 
  2. Once the Ingress controller is installed, you can directly access the application via `http://localhost`
 
-### MicroK8s
+### Kind
 
-If you haven't done already, you need to enable ingress addon:
-
-```bash
-microk8s enable ingress
-```
-
-Then, you can reach your app via the Ingress IP address:
-
-```bash
-$> kubectl get ingress base-cloud-agnost
-```
+It is similar to `Docker Desktop` setup, you first need to install your favourite Ingress controller, then reach your app via browser.
 
 ### K3S
 
