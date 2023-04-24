@@ -2,7 +2,6 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb-specify-pod-resources
-  namespace: mongodb
 spec:
   members: 3
   type: ReplicaSet
@@ -43,7 +42,7 @@ spec:
     - name: my-user
       db: admin
       passwordSecretRef: # a reference to the secret that will be used to generate the user's password
-        name: my-user-password
+        name: mongodb-admin-password
       roles:
         - name: clusterAdmin
           db: admin
@@ -82,14 +81,6 @@ spec:
                   cpu: 1
                   memory: 256M
           affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: cloud.google.com/gke-nodepool
-                        operator: In
-                        values:
-                          - k8s-worker-pool
             podAntiAffinity:
               preferredDuringSchedulingIgnoredDuringExecution:
                 - weight: 100
@@ -107,8 +98,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: my-user-password
-  namespace: mongodb
+  name: mongodb-admin-password
 type: Opaque
 stringData:
   password: mongodb-admin
