@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   base:
   - apiVersion: v2
-    created: "2023-04-24T12:54:51.761312252+03:00"
-    digest: 3029f8e2e204a88524068ae2758bd27b8007c4aae6da159f6b7203291b0ac44e
+    created: "2023-04-24T17:14:41.870290494Z"
+    digest: 85983381b3ab193face41330a35aabac2cb00f13bc9952015a578b838caeecb5
     name: base
     urls:
-    - https://cloud-agnost.github.io/charts/base-0.1.0.tgz
-    version: 0.1.0
-generated: "2023-04-24T12:54:51.761013465+03:00"
+    - https://cloud-agnost.github.io/charts/base-0.1.4.tgz
+    version: 0.1.4
+generated: "2023-04-24T17:14:41.869904487Z"
