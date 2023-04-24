@@ -1,0 +1,114 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb-specify-pod-resources
+  namespace: mongodb
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "5.0.13"
+  # You can expose metrics for Prometheus polling using the
+  # `prometheus` entry.
+  prometheus:
+    # Metrics endpoint HTTP Basic Auth username
+    username: <username>
+
+    # Metrics endpoint HTTP Basic Auth password
+    passwordSecretRef:
+      name: metrics-endpoint-password
+
+    # Optional, defaults to `/metrics`
+    # metricsPath: /metrics
+
+    # Optional defaults to 9216
+    # port: 9216
+
+    # Prometheus endpoint can be configured to use HTTPS
+    # tlsSecretKeyRef:
+    #   name: "<kubernetes.io/tls secret name>"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+    roles: # custom roles are defined here
+      - role: testRole
+        db: admin
+        privileges:
+          - resource:
+              db: "test"
+              collection: "" # an empty string indicates any collection
+            actions:
+              - find
+        roles: []
+  users:
+    - name: my-user
+      db: admin
+      passwordSecretRef: # a reference to the secret that will be used to generate the user's password
+        name: my-user-password
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+      scramCredentialsSecretName: my-scram
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  statefulSet:
+    spec:
+      selector:
+        matchLabels:
+          app: mongodb
+      template:
+        metadata:
+          labels:
+            app: mongodb
+        spec:
+          # resources can be specified by applying an override
+          # per container name.
+          containers:
+            - name: mongod
+              resources:
+                limits:
+                  cpu: 2
+                  memory: 1G
+                requests:
+                  cpu: 1
+                  memory: 512M
+            - name: mongodb-agent
+              resources:
+                limits:
+                  cpu: 1
+                  memory: 250M
+                requests:
+                  cpu: 1
+                  memory: 256M
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: cloud.google.com/gke-nodepool
+                        operator: In
+                        values:
+                          - k8s-worker-pool
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app
+                          operator: In
+                          values:
+                            - mongodb
+                    topologyKey: kubernetes.io/hostname
+# the user credentials will be generated from this secret
+# once the credentials are generated, this secret is no longer required
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-user-password
+  namespace: mongodb
+type: Opaque
+stringData:
+  password: mongodb-admin
