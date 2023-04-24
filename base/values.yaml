@@ -1,5 +1,5 @@
 meta: false
 
-mongodb:
-  prometheus:
-    enabled: false
+# this is needed to install mongodb-community crd inside the chart via crds/ directory
+community-operator-crds:
+  enabled: false
