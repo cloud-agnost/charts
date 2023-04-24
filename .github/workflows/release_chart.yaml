@@ -28,7 +28,7 @@ jobs:
         name: Package Helm Charts
         run: |
           cd ./charts
-          helm package base
+          helm package --dependency-update base
           mkdir base-chart
           mv base-*.tgz base-chart/
           helm repo index base-chart --url https://cloud-agnost.github.io/charts/
