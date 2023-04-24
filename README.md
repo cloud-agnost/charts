@@ -26,7 +26,7 @@ helm upgrade cloud-agnost cloud-agnost/base --set meta=true
 On minikube, if you haven't done already, you need to enable ingress addon:
 
 ```bash
-$> minikube addons enable ingress                                                                                                                                                           ─╯
+$> minikube addons enable ingress
 💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
 You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
     ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.7.0
@@ -40,7 +40,7 @@ Then you can reach your app via the IP address of your ingress:
 
 ```bash
 # get the IP address of the Ingress
-$> kubectl get ingress base-cloud-agnost                                                                                                                                                          ─╯
+$> kubectl get ingress base-cloud-agnost─╯
 NAME                CLASS    HOSTS   ADDRESS        PORTS   AGE
 base-cloud-agnost   <none>   *       192.168.49.2   80      5m8s
 ```
