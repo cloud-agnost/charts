@@ -1,3 +1,11 @@
 apiVersion: v1
-entries: {}
-generated: "2023-04-24T12:44:19.387440606+03:00"
+entries:
+  base:
+  - apiVersion: v2
+    created: "2023-04-24T12:54:51.761312252+03:00"
+    digest: 3029f8e2e204a88524068ae2758bd27b8007c4aae6da159f6b7203291b0ac44e
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-04-24T12:54:51.761013465+03:00"
