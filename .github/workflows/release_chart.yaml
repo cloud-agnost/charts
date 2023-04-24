@@ -39,9 +39,8 @@ jobs:
         name: Publish on Pages
         run: |
           cd ./pages
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name ${{ secrets.REPO_ACCESS_USER }}
+          git config user.email ${{ secrets.REPO_ACCESS_EMAIL }}
           git add .
           git commit -m "New release"
           git push https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/cloud-agnost/charts
-        
