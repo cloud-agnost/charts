@@ -54,17 +54,27 @@ If you already have docker desktop running and you're using the Kubernetes that 
  1. First install NGINX Ingress (or any other ingress controller of your choice):
 
     ```bash
-    helm upgrade --install ingress-nginx ingress-nginx \
-      --repo https://kubernetes.github.io/ingress-nginx \
-      --namespace ingress-nginx --create-namespace
+    $> helm upgrade --install ingress-nginx ingress-nginx \
+        --repo https://kubernetes.github.io/ingress-nginx \
+        --namespace ingress-nginx --create-namespace
     ```
 
  2. Once the Ingress controller is installed, you can directly access the application via `http://localhost`
 
 ### MicroK8s
 
-to-do
+If you haven't done already, you need to enable ingress addon:
+
+```bash
+microk8s enable ingress
+```
+
+Then, you can reach your app via the Ingress IP address:
+
+```bash
+$> kubectl get ingress base-cloud-agnost
+```
 
 ### K3S
 
-to-do
+K3S deploys Traefik ingress by default, you should be able to access the apps directly on the service IP address.
