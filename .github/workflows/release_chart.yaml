@@ -7,9 +7,6 @@ on:
     paths:
       - 'base/Chart.yaml'
 
-env:
-  DOCKER_REGISTRY: 'us.gcr.io'
-
 jobs:
   release-chart:
     runs-on: ubuntu-latest
