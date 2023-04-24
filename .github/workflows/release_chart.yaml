@@ -1,0 +1,46 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'base/Chart.yaml'
+
+env:
+  DOCKER_REGISTRY: 'us.gcr.io'
+
+jobs:
+  release-chart:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout Charts
+        uses: actions/checkout@v3
+        with:
+          ref: master
+          path: charts
+      -
+        name: Checkout Pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: pages
+      -
+        name: Package Helm Charts
+        run: |
+          cd ./charts
+          helm package base
+          mkdir base-chart
+          mv base-*.tgz base-chart/
+          helm repo index base-chart --url https://cloud-agnost.github.io/charts/
+          mv base-chart/* ../pages/
+      -
+        name: Publish on Pages
+        run: |
+          cd ./pages
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "New release"
+          git push
