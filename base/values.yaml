@@ -1,5 +1,6 @@
 meta: false
 
 # this is needed to install mongodb-community crd inside the chart via crds/ directory
-community-operator-crds:
-  enabled: false
+community-operator:
+  community-operator-crds:
+    enabled: false
