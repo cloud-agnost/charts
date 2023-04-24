@@ -1,1 +1,5 @@
 meta: false
+
+mongodb:
+  prometheus:
+    enabled: false
