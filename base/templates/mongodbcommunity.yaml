@@ -48,31 +48,19 @@ spec:
             - name: mongod
               resources:
                 limits:
-                  cpu: 2
-                  memory: 1G
-                requests:
                   cpu: 1
-                  memory: 512M
+                  memory: 2Gi
+                requests:
+                  cpu: 500m
+                  memory: 512Mi
             - name: mongodb-agent
               resources:
                 limits:
-                  cpu: 1
-                  memory: 250M
+                  cpu: 500m
+                  memory: 256Mi
                 requests:
-                  cpu: 1
-                  memory: 256M
-          affinity:
-            podAntiAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 100
-                  podAffinityTerm:
-                    labelSelector:
-                      matchExpressions:
-                        - key: app
-                          operator: In
-                          values:
-                            - mongodb
-                    topologyKey: kubernetes.io/hostname
+                  cpu: 500m
+                  memory: 256Mi
 # the user credentials will be generated from this secret
 # once the credentials are generated, this secret is no longer required
 ---
