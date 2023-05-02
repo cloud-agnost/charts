@@ -12,6 +12,7 @@ spec:
       labels:
         {{- include "provisioner-labels" . | nindent 8 }}
     spec:
+      serviceAccountName: provisioner-sa
       containers:
         - name: provisioner
           image: korayoksay/provisioner:v3
