@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: provisioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "provisioner-labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "provisioner-labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: provisioner
+          image: korayoksay/provisioner:v1
+          ports:
+          - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
