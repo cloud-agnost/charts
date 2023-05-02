@@ -3,15 +3,15 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2023-05-02T10:29:33.467078455Z"
+    created: "2023-05-02T11:21:40.96051735Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
       version: 0.7.9
     description: Base installation for Cloud Agnost Apps
-    digest: a4f00c04f36624dd1776d1dc43bd82e3bb4e1602305f816492d05feb3b5dfe01
+    digest: e5abc87b58f554775770e3c7662ffb68b9dd136654af85bda3c9c8ab8b235586
     name: base
     urls:
-    - https://cloud-agnost.github.io/charts/base-0.4.0.tgz
-    version: 0.4.0
-generated: "2023-05-02T10:29:33.46535974Z"
+    - https://cloud-agnost.github.io/charts/base-0.4.1.tgz
+    version: 0.4.1
+generated: "2023-05-02T11:21:40.957318912Z"
