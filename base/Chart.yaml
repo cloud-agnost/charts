@@ -8,8 +8,8 @@ dependencies:
   version: "0.7.9"
   repository: https://mongodb.github.io/helm-charts
 - name: rabbitmq-cluster-operator
-  version: "2.2.0"
+  version: "3.3.1"
   repository: https://charts.bitnami.com/bitnami
 - name: redis
-  version: "7.0.11"
+  version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
