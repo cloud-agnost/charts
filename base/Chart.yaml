@@ -1,9 +1,15 @@
 apiVersion: v2
 name: base
 description: Base installation for Cloud Agnost Apps
-version: 0.4.1
-appVersion: 0.3.0
+version: 0.5.0
+appVersion: 0.4.0
 dependencies:
 - name: community-operator
   version: "0.7.9"
   repository: https://mongodb.github.io/helm-charts
+- name: rabbitmq-cluster-operator
+  version: "2.2.0"
+  repository: https://charts.bitnami.com/bitnami
+- name: redis
+  version: "7.0.11"
+  repository: https://charts.bitnami.com/bitnami
