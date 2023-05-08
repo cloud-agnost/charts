@@ -26,7 +26,9 @@ helm upgrade cloud-agnost cloud-agnost/base --set meta=true
 On minikube, if you haven't done already, you need to enable ingress addon:
 
 ```bash
-$> minikube addons enable ingress                                                                                                                                                           ─╯
+$> minikube start --cpus=4 --memory 8192
+...
+$> minikube addons enable ingress
 💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
 You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
     ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.7.0
@@ -40,12 +42,26 @@ Then you can reach your app via the IP address of your ingress:
 
 ```bash
 # get the IP address of the Ingress
-$> kubectl get ingress base-cloud-agnost                                                                                                                                                          ─╯
+$> kubectl get ingress base-cloud-agnost
 NAME                CLASS    HOSTS   ADDRESS        PORTS   AGE
 base-cloud-agnost   <none>   *       192.168.49.2   80      5m8s
 ```
 
 Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
+
+### MicroK8s
+
+If you haven't done already, you need to enable ingress addon:
+
+```bash
+$> microk8s enable ingress
+```
+
+Then, you can reach your app via the Ingress IP address:
+
+```bash
+$> kubectl get ingress base-cloud-agnost
+```
 
 ### Docker Desktop
 
@@ -54,17 +70,17 @@ If you already have docker desktop running and you're using the Kubernetes that 
  1. First install NGINX Ingress (or any other ingress controller of your choice):
 
     ```bash
-    helm upgrade --install ingress-nginx ingress-nginx \
-      --repo https://kubernetes.github.io/ingress-nginx \
-      --namespace ingress-nginx --create-namespace
+    $> helm upgrade --install ingress-nginx ingress-nginx \
+        --repo https://kubernetes.github.io/ingress-nginx \
+        --namespace ingress-nginx --create-namespace
     ```
 
  2. Once the Ingress controller is installed, you can directly access the application via `http://localhost`
 
-### MicroK8s
+### Kind
 
-to-do
+It is similar to `Docker Desktop` setup, you first need to install your favourite Ingress controller, then reach your app via browser.
 
 ### K3S
 
-to-do
+K3S deploys Traefik ingress by default, you should be able to access the apps directly on the service IP address.
