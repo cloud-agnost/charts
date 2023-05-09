@@ -61,13 +61,3 @@ spec:
                 requests:
                   cpu: 500m
                   memory: 256Mi
-# the user credentials will be generated from this secret
-# once the credentials are generated, this secret is no longer required
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mongodb-admin-password
-type: Opaque
-stringData:
-  password: mongodb-admin

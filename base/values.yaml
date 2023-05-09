@@ -4,3 +4,18 @@ meta: false
 community-operator:
   community-operator-crds:
     enabled: false
+
+# values for the bitnami redis chart
+redis:
+  nameOverride: redis
+  fullnameOverride: redis
+  master:
+    persistence:
+      size: 2Gi
+  replica:
+    replicaCount: 1
+    persistence:
+      size: 2Gi
+  auth:
+    existingSecret: redis-password
+    existingSecretPasswordKey: password
