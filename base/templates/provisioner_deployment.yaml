@@ -15,7 +15,7 @@ spec:
       serviceAccountName: provisioner-sa
       containers:
         - name: provisioner
-          image: korayoksay/provisioner:v16
+          image: korayoksay/provisioner:v17
           ports:
           - containerPort: 3000
           resources:

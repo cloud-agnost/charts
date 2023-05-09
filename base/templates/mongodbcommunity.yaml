@@ -61,3 +61,20 @@ spec:
                 requests:
                   cpu: 500m
                   memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb-headless
+  name: mongodb-headless
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: mongodb
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: mongodb
