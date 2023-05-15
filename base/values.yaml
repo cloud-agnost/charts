@@ -1,4 +1,90 @@
-meta: false
+engine:
+  monitor:
+    image: "gcr.io/agnost-enterprise/engine/monitor"
+    tag: "6ac0ea8"
+    resources:
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+  realtime:
+    image: "gcr.io/agnost-enterprise/engine/realtime"
+    tag: "6ac0ea8"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '200Mi'
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+  scheduler:
+    image: "gcr.io/agnost-enterprise/engine/scheduler"
+    tag: "6ac0ea8"
+    resources:
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+  worker:
+    image: "gcr.io/agnost-enterprise/engine/worker"
+    tag: "6ac0ea8"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '200Mi'
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+
+platform:
+  core:
+    image: "gcr.io/agnost-enterprise/platform/core"
+    tag: "6ac0ea8"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '200Mi'
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+  sync:
+    image: "gcr.io/agnost-enterprise/platform/sync"
+    tag: "6ac0ea8"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '200Mi'
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+  worker:
+    image: "gcr.io/agnost-enterprise/platform/worker"
+    tag: "6ac0ea8"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '200Mi'
+      requests:
+        cpu: '250m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '256Mi'
+
+# Secret Name that will be used to pull images from a private repository
+# That secret needs to be created seperately!
+imagePullSecretName: regcred
 
 # this is needed to install mongodb-community crd inside the chart via crds/ directory
 community-operator:
