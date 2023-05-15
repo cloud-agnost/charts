@@ -32,16 +32,16 @@ spec:
                secretKeyRef:
                   name: redis-password
                   key: password
-#          - name: MASTER_TOKEN
-#            valueFrom:
-#               secretKeyRef:
-#                  name: cluster-secrets
-#                  key: masterToken
-#          - name: ACCESS_TOKEN
-#            valueFrom:
-#               secretKeyRef:
-#                  name: cluster-secrets
-#                  key: accessToken
+          - name: MASTER_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: cluster-secrets
+                  key: masterToken
+          - name: ACCESS_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: cluster-secrets
+                  key: accessToken
         resources:
             requests:
                cpu: {{ .resources.requests.cpu }}
