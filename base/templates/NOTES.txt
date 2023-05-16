@@ -1,7 +1,7 @@
-{{ $.Chart.Name }} has been installed. Check its status by running:
+👍  {{ $.Chart.Name }} has been installed. Check its status by running:
   kubectl get pods
 
-Here is your cluster information:
+💡  Here is your cluster information:
 
 {{- include "clusterIds" . }}
 uiBaseURL: http://localhost
