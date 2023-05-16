@@ -19,6 +19,6 @@ spec:
                 pathType: Prefix
                 backend:
                    service:
-                      name: platform-core-service
+                      name: platform-core-clusterip-service
                       port:
                          number: 4000

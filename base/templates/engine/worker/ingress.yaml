@@ -19,6 +19,6 @@ spec:
                 pathType: Prefix
                 backend:
                    service:
-                      name: engine-worker-service
+                      name: engine-worker-clusterip-service
                       port:
                          number: 4000
