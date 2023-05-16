@@ -3,9 +3,9 @@
 
 💡  Here is your cluster information:
 
-{{- $secret := (lookup "v1" "Secret" .Release.Namespace "cluster-secrets") -}}
-clusterId: {{ $secret.data.clusterId }}
-clusterAcessToken: {{ $secret.data.clusterAcessToken }}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace "cluster-secrets") }}
+clusterId: {{ $secret.data.clusterId | b64dec }}
+clusterAcessToken: {{ $secret.data.clusterAcessToken | b64dec }}
 
 {{- $ingress := (lookup "networking.k8s.io/v1" "Ingress" .Release.Namespace "engine-realtime-ingress") }}
 uiBaseURL: {{ $ingress.status.loadBalancer.ingress }}
