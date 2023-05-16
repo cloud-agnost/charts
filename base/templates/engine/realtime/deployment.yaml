@@ -27,6 +27,8 @@ spec:
         ports:
         - containerPort: 4000
         env:
+          - name: CACHE_READ_REPLICA_HOSTNAME
+            value: redis-replicas
           - name: REALTIME_CACHE_PWD
             valueFrom:
                secretKeyRef:
