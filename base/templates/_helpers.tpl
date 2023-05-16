@@ -6,6 +6,7 @@ clusterAcessToken: {{ (printf "at_%s" (uuidv4 | replace "-" "" )) }}
 {{- define "tokens" }}
 masterToken: {{ (printf "mt-%s" (uuidv4 | replace "-" "" )) }}
 accessToken: {{ (printf "at-%s" (uuidv4 | replace "-" "" )) }}
+passPhrase: {{ uuidv4 }}
 {{- end }}
 
 {{- define "provisioner-labels" -}}

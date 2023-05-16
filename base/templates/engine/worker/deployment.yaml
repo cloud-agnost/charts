@@ -54,11 +54,11 @@ spec:
                secretKeyRef:
                   name: mongodb-admin-password
                   key: password
-#          - name: PASSPHRASE
-#            valueFrom:
-#               secretKeyRef:
-#                  name: cluster-secrets
-#                  key: passPhrase
+          - name: PASSPHRASE
+            valueFrom:
+               secretKeyRef:
+                  name: cluster-secrets
+                  key: passPhrase
           - name: MASTER_TOKEN
             valueFrom:
                secretKeyRef:

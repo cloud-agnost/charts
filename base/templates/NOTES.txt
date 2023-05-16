@@ -4,4 +4,4 @@
 💡  Here is your cluster information:
 
 {{- include "clusterIds" . }}
-uiBaseURL: http://localhost
+uiBaseURL: http://192.168.49.2/
