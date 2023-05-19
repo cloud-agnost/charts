@@ -5,7 +5,7 @@ version: 0.8.10
 appVersion: 1.0.0
 dependencies:
 - name: community-operator
-  version: "0.7.9"
+  version: "0.8.0"
   repository: https://mongodb.github.io/helm-charts
 - name: rabbitmq-cluster-operator
   version: "3.3.1"
