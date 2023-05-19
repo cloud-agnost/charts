@@ -23,7 +23,7 @@ engine:
         memory: '500Mi'
   scheduler:
     image: "gcr.io/agnost-enterprise/engine/scheduler"
-    tag: "cac4262"
+    tag: "71beb6d"
     resources:
       requests:
         cpu: '250m'

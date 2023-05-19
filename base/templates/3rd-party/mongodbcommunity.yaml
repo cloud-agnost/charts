@@ -26,11 +26,11 @@ spec:
     spec:
       selector:
         matchLabels:
-          app: mongodb
+          app: mongodb-svc
       template:
         metadata:
           labels:
-            app: mongodb
+            app: mongodb-svc
         spec:
           # resources can be specified by applying an override
           # per container name.
