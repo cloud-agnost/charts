@@ -11,7 +11,7 @@ spec:
       modes: ["SCRAM"]
   users:
     - name: mongo-user
-      db: admin
+      db: agnost_enterprise
       passwordSecretRef: # a reference to the secret that will be used to generate the user's password
         name: mongodb-admin-password
       roles:

@@ -52,27 +52,17 @@ spec:
                   name: cluster-secrets
                   key: clusterDBURI
           - name: CLUSTER_DB_USER
-            value: "admin"
+            value: "mongo-user"
           - name: CLUSTER_DB_PWD
             valueFrom:
                secretKeyRef:
                   name: mongodb-admin-password
                   key: password
-          - name: PASSPHRASE
-            valueFrom:
-               secretKeyRef:
-                  name: cluster-secrets
-                  key: passPhrase
           - name: MASTER_TOKEN
             valueFrom:
                secretKeyRef:
                   name: cluster-secrets
                   key: masterToken
-          - name: ACCESS_TOKEN
-            valueFrom:
-               secretKeyRef:
-                  name: cluster-secrets
-                  key: accessToken
         resources:
             requests:
                cpu: {{ .resources.requests.cpu }}
