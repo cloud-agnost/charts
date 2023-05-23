@@ -23,7 +23,7 @@ engine:
         memory: '500Mi'
   scheduler:
     image: "gcr.io/agnost-enterprise/engine/scheduler"
-    tag: "71beb6d"
+    tag: "5f739f7"
     resources:
       requests:
         cpu: '100m'
@@ -38,7 +38,7 @@ engine:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '100m'
+        cpu: '150m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -52,10 +52,10 @@ platform:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '100m'
+        cpu: '200m'
         memory: '256Mi'
       limits:
-        cpu: '250m'
+        cpu: '500m'
         memory: '500Mi'
   sync:
     image: "gcr.io/agnost-enterprise/platform/sync"
