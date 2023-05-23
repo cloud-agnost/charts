@@ -4,7 +4,7 @@ engine:
     tag: "cac4262"
     resources:
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -16,7 +16,7 @@ engine:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -26,7 +26,7 @@ engine:
     tag: "71beb6d"
     resources:
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -38,7 +38,7 @@ engine:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -52,7 +52,7 @@ platform:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -64,7 +64,7 @@ platform:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
@@ -76,7 +76,7 @@ platform:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '250m'
+        cpu: '100m'
         memory: '256Mi'
       limits:
         cpu: '250m'
