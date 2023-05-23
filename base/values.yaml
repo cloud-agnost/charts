@@ -33,7 +33,7 @@ engine:
         memory: '500Mi'
   worker:
     image: "gcr.io/agnost-enterprise/engine/worker"
-    tag: "cac4262"
+    tag: "aad4924"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'

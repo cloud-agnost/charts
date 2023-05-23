@@ -41,11 +41,21 @@ spec:
                secretKeyRef:
                   name: redis-password
                   key: password
-          - name: QUEUE_URL
+          - name: QUEUE_HOST
             valueFrom:
                secretKeyRef:
-                  name: cluster-secrets
-                  key: queueURL
+                  name: rabbitmq-default-user
+                  key: host
+          - name: QUEUE_USERNAME
+            valueFrom:
+               secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: username
+          - name: QUEUE_PASSWORD
+            valueFrom:
+               secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password
           - name: CLUSTER_DB_URI
             valueFrom:
                secretKeyRef:
