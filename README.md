@@ -12,7 +12,21 @@ helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 helm install cloud-agnost-base cloud-agnost/base
 
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
+# it takes around 5 minutes (depending on your local resources and internet connection)
 kubectl get pods
+NAME                                                              READY   STATUS    RESTARTS   AGE
+cloud-agnost-base-rabbitmq-cluster-operator-6bcd9ff874-pxfn5      1/1     Running   0          5m34s
+cloud-agnost-base-rabbitmq-messaging-topology-operator-558z95rf   1/1     Running   0          5m34s
+mongodb-0                                                         2/2     Running   0          5m30s
+mongodb-1                                                         2/2     Running   0          4m45s
+mongodb-2                                                         2/2     Running   0          4m2s
+mongodb-kubernetes-operator-6cf66cbc7f-zsf9s                      1/1     Running   0          5m34s
+provisioner-7595bc66bb-vs8ll                                      1/1     Running   0          5m34s
+rabbitmq-server-0                                                 0/1     Running   0          5m16s
+rabbitmq-server-1                                                 1/1     Running   0          5m16s
+rabbitmq-server-2                                                 1/1     Running   0          5m16s
+redis-master-0                                                    1/1     Running   0          5m34s
+redis-replicas-0                                                  1/1     Running   0          5m34s
 
 # install cloud-agnost applications
 helm install agnost cloud-agnost/apps
