@@ -53,7 +53,9 @@ spec:
     - rabbitmq_delayed_message_exchange
     envConfig: |
       RABBITMQ_PLUGINS_DIR=/opt/rabbitmq/plugins:/opt/rabbitmq/community-plugins:/opt/bitnami/rabbitmq/plugins
+
 ---
+
 apiVersion: rabbitmq.com/v1beta1
 kind: User
 metadata:
@@ -65,16 +67,9 @@ spec:
     - administrator
   importCredentialsSecret:
     name: rabbitmq-credentials
+
 ---
-apiVersion: rabbitmq.com/v1beta1
-kind: Vhost
-metadata:
-  name: default
-spec:
-  name: "/"
-  rabbitmqClusterReference:
-    name: rabbitmq
----
+
 apiVersion: rabbitmq.com/v1beta1
 kind: Permission
 metadata:

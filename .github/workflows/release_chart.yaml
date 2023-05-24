@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
     paths:
+      - 'apps/Chart.yaml'
       - 'base/Chart.yaml'
 
 jobs:
@@ -28,11 +29,14 @@ jobs:
         name: Package Helm Charts
         run: |
           cd ./charts
-          helm package --dependency-update base
-          mkdir base-chart
-          mv base-*.tgz base-chart/
-          helm repo index base-chart --url https://cloud-agnost.github.io/charts/
-          mv base-chart/* ../pages/
+          for chart_name in apps base
+          do
+            helm package --dependency-update ${chart-name}
+            mkdir ${chart-name}-chart
+            mv ${chart-name}-*.tgz ${chart-name}-chart/
+            helm repo index ${chart-name}-chart --url https://cloud-agnost.github.io/charts/
+            mv ${chart-name}-chart/* ../pages/
+          done
       -
         name: Publish on Pages
         run: |

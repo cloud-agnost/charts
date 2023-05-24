@@ -5,11 +5,20 @@ First make sure that you have helm installed [here](https://helm.sh/docs/intro/i
 Then run the below commands:
 
 ```bash
+# Add helm repo
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
-helm install cloud-agnost cloud-agnost/base
+
+# Install dependency apps (mongodb, rabbitmq, redis)
+helm install cloud-agnost-base cloud-agnost/base
+
+# check the pods status, make sure that mongodb, rabbitmq, and redis are running:
+kubectl get pods
+
+# install cloud-agnost applications
+helm install agnost cloud-agnost/apps
 ```
 
-You can configure the settings based on [values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml)
+You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml) or [apps values.yaml](ttps://github.com/cloud-agnost/charts/blob/master/apps/values.yaml)
 
 ```bash
 # initial installation:

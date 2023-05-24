@@ -1,0 +1,88 @@
+engine:
+  monitor:
+    image: "gcr.io/agnost-enterprise/engine/monitor"
+    tag: "da7f072"
+    resources:
+      requests:
+        cpu: '100m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+  realtime:
+    image: "gcr.io/agnost-enterprise/engine/realtime"
+    tag: "da7f072"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '250Mi'
+      requests:
+        cpu: '100m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+  scheduler:
+    image: "gcr.io/agnost-enterprise/engine/scheduler"
+    tag: "2ef3932"
+    resources:
+      requests:
+        cpu: '100m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+  worker:
+    image: "gcr.io/agnost-enterprise/engine/worker"
+    tag: "2ef3932"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '250Mi'
+      requests:
+        cpu: '150m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+
+platform:
+  core:
+    image: "gcr.io/agnost-enterprise/platform/core"
+    tag: "da7f072"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '250Mi'
+      requests:
+        cpu: '200m'
+        memory: '256Mi'
+      limits:
+        cpu: '500m'
+        memory: '500Mi'
+  sync:
+    image: "gcr.io/agnost-enterprise/platform/sync"
+    tag: "cac4262"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '250Mi'
+      requests:
+        cpu: '100m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+  worker:
+    image: "gcr.io/agnost-enterprise/platform/worker"
+    tag: "cac4262"
+    resources:
+      targetCpuUtilization: 90
+      targetMemory: '250Mi'
+      requests:
+        cpu: '100m'
+        memory: '256Mi'
+      limits:
+        cpu: '250m'
+        memory: '500Mi'
+
+# Secret Name that will be used to pull images from a private repository
+# That secret needs to be created seperately!
+imagePullSecretName: regcred
+
