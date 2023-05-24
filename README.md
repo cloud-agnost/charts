@@ -34,7 +34,6 @@ helm install apps cloud-agnost/apps
 
 You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml) or [apps values.yaml](ttps://github.com/cloud-agnost/charts/blob/master/apps/values.yaml)
 
-
 ## Environment Specific Instructions
 
 ### Minikube

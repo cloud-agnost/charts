@@ -82,6 +82,10 @@ platform:
         cpu: '250m'
         memory: '500Mi'
 
+provisioner:
+  image: "gcr.io/agnost-enterprise/provisioner"
+  tag: "38d50de"
+
 # Secret Name that will be used to pull images from a private repository
 # That secret needs to be created seperately!
 imagePullSecretName: regcred
