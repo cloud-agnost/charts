@@ -31,11 +31,11 @@ jobs:
           cd ./charts
           for chart_name in apps base
           do
-            helm package --dependency-update ${chart-name}
-            mkdir ${chart-name}-chart
-            mv ${chart-name}-*.tgz ${chart-name}-chart/
-            helm repo index ${chart-name}-chart --url https://cloud-agnost.github.io/charts/
-            mv ${chart-name}-chart/* ../pages/
+            helm package --dependency-update ${chart_name}
+            mkdir ${chart_name}-chart
+            mv ${chart_name}-*.tgz ${chart_name}-chart/
+            helm repo index ${chart_name}-chart --url https://cloud-agnost.github.io/charts/
+            mv ${chart_name}-chart/* ../pages/
           done
       -
         name: Publish on Pages
