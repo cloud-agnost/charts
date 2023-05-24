@@ -9,7 +9,7 @@ Then run the below commands:
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 
 # Install dependency apps (mongodb, rabbitmq, redis)
-helm install cloud-agnost-base cloud-agnost/base
+helm install base cloud-agnost/base
 
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 # it takes around 5 minutes (depending on your local resources and internet connection)
@@ -29,18 +29,11 @@ redis-master-0                                                    1/1     Runnin
 redis-replicas-0                                                  1/1     Running   0          5m34s
 
 # install cloud-agnost applications
-helm install agnost cloud-agnost/apps
+helm install apps cloud-agnost/apps
 ```
 
 You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml) or [apps values.yaml](ttps://github.com/cloud-agnost/charts/blob/master/apps/values.yaml)
 
-```bash
-# initial installation:
-helm install cloud-agnost cloud-agnost/base --set meta=true
-
-# if you have already installed with other parameters:
-helm upgrade cloud-agnost cloud-agnost/base --set meta=true
-```
 
 ## Environment Specific Instructions
 
