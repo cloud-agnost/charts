@@ -17,7 +17,7 @@ spec:
       roles:
         - name: clusterAdmin
           db: admin
-        - name: userAdminAnyDatabase
+        - name: readWriteAnyDatabase
           db: admin
       scramCredentialsSecretName: mongo-user
   additionalMongodConfig:
