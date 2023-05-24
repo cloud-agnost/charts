@@ -29,14 +29,14 @@ jobs:
         name: Package Helm Charts
         run: |
           cd ./charts
+          mkdir chart-files
           for chart_name in apps base
           do
             helm package --dependency-update ${chart_name}
-            mkdir ${chart_name}-chart
-            mv ${chart_name}-*.tgz ${chart_name}-chart/
-            helm repo index ${chart_name}-chart --url https://cloud-agnost.github.io/charts/
-            mv ${chart_name}-chart/* ../pages/
+            mv ${chart_name}-*.tgz chart-files
           done
+          helm repo index chart-files --url https://cloud-agnost.github.io/charts/
+          mv chart-files/* ../pages/
       -
         name: Publish on Pages
         run: |
