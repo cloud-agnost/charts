@@ -5,19 +5,34 @@ First make sure that you have helm installed [here](https://helm.sh/docs/intro/i
 Then run the below commands:
 
 ```bash
+# Add helm repo
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
-helm install cloud-agnost cloud-agnost/base
+
+# Install dependency apps (mongodb, rabbitmq, redis)
+helm install base cloud-agnost/base
+
+# check the pods status, make sure that mongodb, rabbitmq, and redis are running:
+# it takes around 5 minutes (depending on your local resources and internet connection)
+kubectl get pods
+NAME                                                 READY   STATUS    RESTARTS   AGE
+base-rabbitmq-cluster-operator-6bcd9ff874-pxfn5      1/1     Running   0          5m34s
+base-rabbitmq-messaging-topology-operator-558z95rf   1/1     Running   0          5m34s
+mongodb-0                                            2/2     Running   0          5m30s
+mongodb-1                                            2/2     Running   0          4m45s
+mongodb-2                                            2/2     Running   0          4m2s
+mongodb-kubernetes-operator-6cf66cbc7f-zsf9s         1/1     Running   0          5m34s
+provisioner-7595bc66bb-vs8ll                         1/1     Running   0          5m34s
+rabbitmq-server-0                                    1/1     Running   0          5m16s
+rabbitmq-server-1                                    1/1     Running   0          5m16s
+rabbitmq-server-2                                    1/1     Running   0          5m16s
+redis-master-0                                       1/1     Running   0          5m34s
+redis-replicas-0                                     1/1     Running   0          5m34s
+
+# install cloud-agnost applications
+helm install apps cloud-agnost/apps
 ```
 
-You can configure the settings based on [values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml)
-
-```bash
-# initial installation:
-helm install cloud-agnost cloud-agnost/base --set meta=true
-
-# if you have already installed with other parameters:
-helm upgrade cloud-agnost cloud-agnost/base --set meta=true
-```
+You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml) or [apps values.yaml](ttps://github.com/cloud-agnost/charts/blob/master/apps/values.yaml)
 
 ## Environment Specific Instructions
 
@@ -26,6 +41,8 @@ helm upgrade cloud-agnost cloud-agnost/base --set meta=true
 On minikube, if you haven't done already, you need to enable ingress addon:
 
 ```bash
+$> minikube start --cpus=4 --memory 8192
+...
 $> minikube addons enable ingress
 💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
 You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
@@ -40,7 +57,7 @@ Then you can reach your app via the IP address of your ingress:
 
 ```bash
 # get the IP address of the Ingress
-$> kubectl get ingress base-cloud-agnost─╯
+$> kubectl get ingress base-cloud-agnost
 NAME                CLASS    HOSTS   ADDRESS        PORTS   AGE
 base-cloud-agnost   <none>   *       192.168.49.2   80      5m8s
 ```
