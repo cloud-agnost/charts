@@ -22,7 +22,7 @@ mongodb-1                                            2/2     Running   0        
 mongodb-2                                            2/2     Running   0          4m2s
 mongodb-kubernetes-operator-6cf66cbc7f-zsf9s         1/1     Running   0          5m34s
 provisioner-7595bc66bb-vs8ll                         1/1     Running   0          5m34s
-rabbitmq-server-0                                    0/1     Running   0          5m16s
+rabbitmq-server-0                                    1/1     Running   0          5m16s
 rabbitmq-server-1                                    1/1     Running   0          5m16s
 rabbitmq-server-2                                    1/1     Running   0          5m16s
 redis-master-0                                       1/1     Running   0          5m34s

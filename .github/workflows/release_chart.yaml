@@ -7,6 +7,7 @@ on:
     paths:
       - 'apps/Chart.yaml'
       - 'base/Chart.yaml'
+      - 'README.md'
 
 jobs:
   release-chart:
@@ -37,6 +38,7 @@ jobs:
           done
           helm repo index chart-files --url https://cloud-agnost.github.io/charts/
           mv chart-files/* ../pages/
+          cp README.md ../pages/
       -
         name: Publish on Pages
         run: |
