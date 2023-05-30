@@ -1,4 +1,13 @@
 👍  {{ $.Chart.Name }} has been installed. Check its status by running:
+  
   kubectl get pods
 
+
+{{- if .Release.IsInstall }}
 💡  Here is your cluster information:
+
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterId.+" | replace "clusterId" "Cluster ID          " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAcessToken.+" | replace "clusterAcessToken" "Cluster Acess Token " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Access Token        " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "uiBaseURL.+" | replace "uiBaseURL" "UI Base URL         " }}
+{{- end }}

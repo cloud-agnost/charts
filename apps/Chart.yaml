@@ -1,5 +1,0 @@
-apiVersion: v2
-name: apps
-description: Cloud Agnost Apps Installation
-version: 0.9.8
-appVersion: 1.0.0

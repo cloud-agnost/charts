@@ -1,0 +1,54 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb
+  namespace: {{ .Release.Namespace }}
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "6.0.5"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: mongo-user
+      db: agnost_enterprise
+      passwordSecretRef: # a reference to the secret that will be used to generate the user's password
+        name: mongodb-admin-password
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: readWriteAnyDatabase
+          db: admin
+      scramCredentialsSecretName: mongo-user
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  statefulSet:
+    spec:
+      selector:
+        matchLabels:
+          app: mongodb-svc
+      template:
+        metadata:
+          labels:
+            app: mongodb-svc
+        spec:
+          # resources can be specified by applying an override
+          # per container name.
+          containers:
+            - name: mongod
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 2Gi
+                requests:
+                  cpu: 200m
+                  memory: 512Mi
+            - name: mongodb-agent
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
