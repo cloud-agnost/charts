@@ -19,8 +19,6 @@ spec:
     metadata:
       labels:
         app: engine-monitor
-      annotations:
-        checksum/secret: {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | sha256sum }}
     spec:
       containers:
       - name: engine-monitor
