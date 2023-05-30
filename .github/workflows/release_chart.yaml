@@ -31,7 +31,7 @@ jobs:
         run: |
           cd ./charts
           mkdir chart-files
-          for chart_name in apps base
+          for chart_name in base
           do
             helm package --dependency-update ${chart_name}
             mv ${chart_name}-*.tgz chart-files

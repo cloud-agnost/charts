@@ -13,6 +13,7 @@ dependencies:
 - name: redis
   version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
+# postgresql chart needed
 #- name: postgres-operator-charts
 #  version: "1.10.0"
 #  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
