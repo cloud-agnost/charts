@@ -1,19 +1,9 @@
 apiVersion: v1
 entries:
-  apps:
-  - apiVersion: v2
-    appVersion: 1.0.0
-    created: "2023-05-25T13:10:43.972442009Z"
-    description: Cloud Agnost Apps Installation
-    digest: 5b75a79e7c468b095a27cc97597d584f57090d45d24aec06ff49427426220728
-    name: apps
-    urls:
-    - https://cloud-agnost.github.io/charts/apps-0.9.8.tgz
-    version: 0.9.8
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-05-25T13:10:43.987782764Z"
+    created: "2023-05-30T08:58:18.505702695Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -25,9 +15,9 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 17.10.2
     description: Base installation for Cloud Agnost Apps
-    digest: 45b5d5159a7cbf336110fc8b73c24b778494d9ad1fc4adc04bd136af928280ea
+    digest: 2bf170b44e9aa13e447d86224f5210f2a091cead8f824de36e84a527fe50a7e5
     name: base
     urls:
-    - https://cloud-agnost.github.io/charts/base-0.9.8.tgz
-    version: 0.9.8
-generated: "2023-05-25T13:10:43.971556912Z"
+    - https://cloud-agnost.github.io/charts/base-0.9.9.tgz
+    version: 0.9.9
+generated: "2023-05-30T08:58:18.49045263Z"

@@ -9,11 +9,11 @@ Then run the below commands:
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 
 # Install dependency apps (mongodb, rabbitmq, redis)
-helm install base cloud-agnost/base
+helm install agnost cloud-agnost/base --namespace agnost --create-namespace
 
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 # it takes around 5 minutes (depending on your local resources and internet connection)
-kubectl get pods
+kubectl get pods -n agnost
 NAME                                                 READY   STATUS    RESTARTS   AGE
 base-rabbitmq-cluster-operator-6bcd9ff874-pxfn5      1/1     Running   0          5m34s
 base-rabbitmq-messaging-topology-operator-558z95rf   1/1     Running   0          5m34s
@@ -27,12 +27,9 @@ rabbitmq-server-1                                    1/1     Running   0        
 rabbitmq-server-2                                    1/1     Running   0          5m16s
 redis-master-0                                       1/1     Running   0          5m34s
 redis-replicas-0                                     1/1     Running   0          5m34s
-
-# install cloud-agnost applications
-helm install apps cloud-agnost/apps
 ```
 
-You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml) or [apps values.yaml](ttps://github.com/cloud-agnost/charts/blob/master/apps/values.yaml)
+You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml).
 
 ## Environment Specific Instructions
 
