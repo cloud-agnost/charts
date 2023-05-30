@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Base installation for Cloud Agnost Apps
-version: 0.9.12
+version: 0.9.13
 appVersion: 1.0.0
 dependencies:
 - name: community-operator
