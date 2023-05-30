@@ -14,19 +14,27 @@ helm install agnost cloud-agnost/base --namespace agnost --create-namespace
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 # it takes around 5 minutes (depending on your local resources and internet connection)
 kubectl get pods -n agnost
-NAME                                                 READY   STATUS    RESTARTS   AGE
-base-rabbitmq-cluster-operator-6bcd9ff874-pxfn5      1/1     Running   0          5m34s
-base-rabbitmq-messaging-topology-operator-558z95rf   1/1     Running   0          5m34s
-mongodb-0                                            2/2     Running   0          5m30s
-mongodb-1                                            2/2     Running   0          4m45s
-mongodb-2                                            2/2     Running   0          4m2s
-mongodb-kubernetes-operator-6cf66cbc7f-zsf9s         1/1     Running   0          5m34s
-provisioner-7595bc66bb-vs8ll                         1/1     Running   0          5m34s
-rabbitmq-server-0                                    1/1     Running   0          5m16s
-rabbitmq-server-1                                    1/1     Running   0          5m16s
-rabbitmq-server-2                                    1/1     Running   0          5m16s
-redis-master-0                                       1/1     Running   0          5m34s
-redis-replicas-0                                     1/1     Running   0          5m34s
+NAME                                                           READY   STATUS    RESTARTS      AGE
+agnost-rabbitmq-cluster-operator-6d4dd5cd6d-cjg8q              1/1     Running   0             8m8s
+agnost-rabbitmq-messaging-topology-operator-6d4b7ff656-smw22   1/1     Running   0             8m8s
+engine-monitor-deployment-6fd67646b9-txzw2                     1/1     Running   0             8m8s
+engine-realtime-deployment-5ff4594bdd-2lz6f                    1/1     Running   0             8m8s
+engine-scheduler-deployment-85bc7c7ddc-smqq4                   1/1     Running   0             8m8s
+engine-worker-deployment-77d9d5fd7-d6s4z                       1/1     Running   0             8m8s
+mongodb-0                                                      2/2     Running   0             7m57s
+mongodb-1                                                      2/2     Running   0             6m51s
+mongodb-2                                                      2/2     Running   0             5m59s
+mongodb-kubernetes-operator-6cf66cbc7f-482h6                   1/1     Running   0             8m8s
+platform-core-deployment-5f79d59868-9jrbm                      1/1     Running   0             8m8s
+platform-sync-deployment-7c8bf79df6-h2prc                      1/1     Running   0             8m8s
+platform-worker-deployment-868cb59558-rv86h                    1/1     Running   0             8m8s
+platform-worker-deployment-868cb59558-x2gpz                    1/1     Running   0             83s
+provisioner-8696fffc96-27b8x                                   1/1     Running   0             8m8s
+rabbitmq-server-0                                              1/1     Running   0             7m49s
+rabbitmq-server-1                                              1/1     Running   0             7m49s
+rabbitmq-server-2                                              1/1     Running   0             7m49s
+redis-master-0                                                 1/1     Running   0             8m8s
+redis-replicas-0                                               1/1     Running   0             8m8s
 ```
 
 You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml).
