@@ -48,7 +48,7 @@ engine:
         memory: '500Mi'
   scheduler:
     image: "gcr.io/agnost-enterprise/engine/scheduler"
-    tag: "2ef3932"
+    tag: "8ea442a"
     resources:
       requests:
         cpu: '100m'
@@ -58,7 +58,7 @@ engine:
         memory: '500Mi'
   worker:
     image: "gcr.io/agnost-enterprise/engine/worker"
-    tag: "2ef3932"
+    tag: "f2f5f8c"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -72,7 +72,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-enterprise/platform/core"
-    tag: "da7f072"
+    tag: "f2f5f8c"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -96,7 +96,7 @@ platform:
         memory: '500Mi'
   worker:
     image: "gcr.io/agnost-enterprise/platform/worker"
-    tag: "cac4262"
+    tag: "8ea442a"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
