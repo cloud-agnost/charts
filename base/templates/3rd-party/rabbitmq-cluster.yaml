@@ -13,7 +13,6 @@ spec:
       cpu: 200m
       memory: 500Mi
   persistence:
-    storageClassName: standard
     storage: 3Gi
   override:
     statefulSet:

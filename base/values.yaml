@@ -26,7 +26,7 @@ auth:
 engine:
   monitor:
     image: "gcr.io/agnost-enterprise/engine/monitor"
-    tag: "da7f072"
+    tag: "07a2249"
     resources:
       requests:
         cpu: '100m'
@@ -48,7 +48,7 @@ engine:
         memory: '500Mi'
   scheduler:
     image: "gcr.io/agnost-enterprise/engine/scheduler"
-    tag: "8ea442a"
+    tag: "1b2cf84"
     resources:
       requests:
         cpu: '100m'
@@ -58,7 +58,7 @@ engine:
         memory: '500Mi'
   worker:
     image: "gcr.io/agnost-enterprise/engine/worker"
-    tag: "f2f5f8c"
+    tag: "07a2249"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -72,7 +72,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-enterprise/platform/core"
-    tag: "f2f5f8c"
+    tag: "db64900"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -96,7 +96,7 @@ platform:
         memory: '500Mi'
   worker:
     image: "gcr.io/agnost-enterprise/platform/worker"
-    tag: "8ea442a"
+    tag: "db64900"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
