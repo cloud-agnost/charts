@@ -8,8 +8,11 @@ Then run the below commands:
 # Add helm repo
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 
-# Install dependency apps (mongodb, rabbitmq, redis)
+# Install the chart on MiniKube:
 helm install agnost cloud-agnost/base --namespace agnost --create-namespace
+
+## if you are installing on a docker-desktop
+helm install agnost cloud-agnost/base --namespace agnost --create-namespace --set kubernetes-platform=dockerdesktop
 
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 # it takes around 5 minutes (depending on your local resources and internet connection)
