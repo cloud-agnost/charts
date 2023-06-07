@@ -1,3 +1,9 @@
+# Kubernetes platform. Values can be:
+# - minikube (default)
+# - dockerdesktop
+# - kind
+kubernetes-platform: minukube
+
 # this is needed to install mongodb-community crd inside the chart via crds/ directory
 community-operator:
   community-operator-crds:

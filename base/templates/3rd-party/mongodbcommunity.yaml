@@ -45,6 +45,15 @@ spec:
                   cpu: 200m
                   memory: 512Mi
             - name: mongodb-agent
+              readinessProbe:
+                exec:
+                  command:
+                  - /opt/scripts/readinessprobe
+                failureThreshold: 40
+                initialDelaySeconds: 5
+                periodSeconds: 30
+                successThreshold: 1
+                timeoutSeconds: 20
               resources:
                 limits:
                   cpu: 100m

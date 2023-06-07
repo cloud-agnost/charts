@@ -4,7 +4,7 @@ metadata:
   name: rabbitmq
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: 3
+  replicas: 1
   resources:
     requests:
       cpu: 200m
@@ -32,8 +32,8 @@ spec:
                   - sh
                   - -c
                   - curl -L -v https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.11.1/rabbitmq_delayed_message_exchange-3.11.1.ez --output /community-plugins/rabbitmq_delayed_message_exchange-3.11.1.ez
-                image: curlimages/curl
-                imagePullPolicy: IfNotPresent
+                image: curlimages/curl:8.1.1
+                imagePullPolicy: Always
                 name: copy-community-plugins
                 resources:
                   limits:
