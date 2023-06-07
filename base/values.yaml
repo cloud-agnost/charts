@@ -2,7 +2,7 @@
 # - minikube (default)
 # - dockerdesktop
 # - kind
-kubernetes-platform: minikube
+host: minikube
 
 # this is needed to install mongodb-community crd inside the chart via crds/ directory
 community-operator:
