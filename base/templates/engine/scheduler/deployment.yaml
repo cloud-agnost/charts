@@ -99,7 +99,3 @@ spec:
                cpu: {{ .resources.limits.cpu }}
                memory: {{ .resources.limits.memory }}
         {{- end }}
-      {{- if .Values.imagePullSecretName }}
-      imagePullSecrets:
-      - name: {{ .Values.imagePullSecretName }}
-      {{- end }}

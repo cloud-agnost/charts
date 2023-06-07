@@ -20,6 +20,7 @@ spec:
       labels:
         app: platform-core
     spec:
+      serviceAccountName: provisioner-sa
       containers:
       - name: platform-core
         {{- with .Values.platform.core }}
@@ -94,6 +95,9 @@ spec:
                secretKeyRef:
                   name: cluster-secrets
                   key: accessToken
+        volumeMounts:
+          - name: cluster-storage
+            mountPath: /storage
         livenessProbe:
           httpGet:
             path: /health
@@ -114,7 +118,7 @@ spec:
                cpu: {{ .resources.limits.cpu }}
                memory: {{ .resources.limits.memory }}
         {{- end }}
-      {{- if .Values.imagePullSecretName }}
-      imagePullSecrets:
-      - name: {{ .Values.imagePullSecretName }}
-      {{- end }}
+      volumes:
+        - name: cluster-storage
+          persistentVolumeClaim:
+            claimName: cluster-storage-pvc
