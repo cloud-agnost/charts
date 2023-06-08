@@ -1,11 +1,13 @@
 
-👍 {{ $.Release.Name }} has been installed. Check its status by running:
+👍 {{ $.Release.Name }} has been installed. It might take 5-10 minutes to complete the required deployments. Please check your cluster deployment status by running:
   
   kubectl get pods
 
-💡 Here is your cluster information:
+💡 Here is your cluster information: Please keep this information in a safe place. You will need "Cluster Access Token" to finalize the cluster set-up through Agnost Studio that is installed in your Kubernetes cluster.
 
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterId.+" | replace "clusterId" "Cluster ID          " }}
-{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAcessToken.+" | replace "clusterAcessToken" "Cluster Acess Token " }}
-{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Access Token        " }}
-{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "uiBaseURL.+" | replace "uiBaseURL" "UI Base URL         " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAcessToken.+" | replace "clusterAcessToken" "Cluster Access Token " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Engine Access Token        " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "masterToken.+" | replace "masterToken" "Platform Access Token        " }}
+
+ℹ️ As a next step you need to finalize your cluster set-up by creating your user account through Agnost Studio. To launch Agnost Studio, type the URL or IP address of your cluster (e.g., http(s)://<your cluster URL or IP>). If you have installed your cluster locally you can access Agnost Studio at http://localhost
