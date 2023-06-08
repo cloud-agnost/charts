@@ -33,7 +33,7 @@ engine:
     tag: "7d7c39e"
     resources:
       requests:
-        cpu: '100m'
+        cpu: '50m'
         memory: '256Mi'
       limits:
         cpu: '1000m'
@@ -45,7 +45,7 @@ engine:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '100m'
+        cpu: '50m'
         memory: '256Mi'
       limits:
         cpu: '1000m'
@@ -55,7 +55,7 @@ engine:
     tag: "4077190"
     resources:
       requests:
-        cpu: '100m'
+        cpu: '50m'
         memory: '256Mi'
       limits:
         cpu: '1000m'
@@ -92,7 +92,7 @@ platform:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
       requests:
-        cpu: '100m'
+        cpu: '50m'
         memory: '256Mi'
       limits:
         cpu: '1000m'
