@@ -10,8 +10,8 @@ spec:
       cpu: 200m
       memory: 500Mi
     limits:
-      cpu: 200m
-      memory: 500Mi
+      cpu: 500m
+      memory: 1Gi
   persistence:
     storage: 3Gi
   override:
@@ -37,10 +37,10 @@ spec:
                 name: copy-community-plugins
                 resources:
                   limits:
-                    cpu: 500m
-                    memory: 1Gi
+                    cpu: 100m
+                    memory: 500Mi
                   requests:
-                    cpu: 250m
+                    cpu: 100m
                     memory: 500Mi
                 terminationMessagePolicy: FallbackToLogsOnError
                 volumeMounts:
