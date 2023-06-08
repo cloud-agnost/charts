@@ -99,7 +99,7 @@ platform:
         memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
-    tag: "4077190"
+    tag: "8804a15"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
