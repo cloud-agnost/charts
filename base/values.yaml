@@ -111,7 +111,7 @@ platform:
         memory: '2Gi'
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "4077190"
+  tag: "9450209"
   resources:
     requests:
       cpu: '50m'
