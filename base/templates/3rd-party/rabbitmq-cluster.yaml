@@ -37,10 +37,10 @@ spec:
                 name: copy-community-plugins
                 resources:
                   limits:
-                    cpu: 100m
-                    memory: 500Mi
+                    cpu: 500m
+                    memory: 1Gi
                   requests:
-                    cpu: 100m
+                    cpu: 250m
                     memory: 500Mi
                 terminationMessagePolicy: FallbackToLogsOnError
                 volumeMounts:
