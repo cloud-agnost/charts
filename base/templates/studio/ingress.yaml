@@ -17,10 +17,10 @@ spec:
       - host: 
         http:
            paths:
-              - path: /sync/(.*)
+              - path: /(.*)
                 pathType: Prefix
                 backend:
                    service:
-                      name: platform-sync-clusterip-service
+                      name: studio-clusterip-service
                       port:
                          number: 4000
