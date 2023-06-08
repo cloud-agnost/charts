@@ -42,7 +42,7 @@ engine:
         memory: '2Gi'
   realtime:
     image: "gcr.io/agnost-community/engine/realtime"
-    tag: "7d7c39e"
+    tag: "4077190"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -54,7 +54,7 @@ engine:
         memory: '2Gi'
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
-    tag: "7d7c39e"
+    tag: "4077190"
     resources:
       requests:
         cpu: '100m'
@@ -90,7 +90,7 @@ platform:
         memory: '2Gi'
   sync:
     image: "gcr.io/agnost-community/platform/sync"
-    tag: "7d7c39e"
+    tag: "4077190"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -102,7 +102,7 @@ platform:
         memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
-    tag: "7d7c39e"
+    tag: "4077190"
     resources:
       targetCpuUtilization: 90
       targetMemory: '250Mi'
@@ -115,7 +115,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "7d7c39e"
+  tag: "4077190"
   resources:
     requests:
       cpu: '100m'
