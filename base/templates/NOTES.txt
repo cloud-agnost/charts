@@ -1,6 +1,6 @@
 
 👍  Agnost community cluster installation has started! 
-ℹ️  It might take 5-10 minutes to complete the required deployments. Please check your cluster deployment status by running:
+⏳  It might take 5-10 minutes to complete the required deployments. Please check your cluster deployment status by running:
   
     kubectl get pods
 
@@ -12,6 +12,6 @@
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Engine Access Token   " }}
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "masterToken.+" | replace "masterToken" "Platform Access Token " }}
 
-ℹ️  As a next step, you need to finalize your cluster set-up by creating your user account through Agnost Studio. 
-ℹ️  To launch Agnost Studio, type the URL or IP address of your cluster on your browser (e.g., http(s)://<your cluster URL or IP>). 
-ℹ️  If you have installed your cluster locally you can access Agnost Studio at http://localhost
+📣  As a next step, you need to finalize your cluster set-up by creating your user account through Agnost Studio. 
+📣  To launch Agnost Studio, type the URL or IP address of your cluster on your browser (e.g., http(s)://<your cluster URL or IP>). 
+🌍  If you have installed your cluster locally you can access Agnost Studio at http://localhost
