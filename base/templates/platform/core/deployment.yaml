@@ -23,8 +23,7 @@ spec:
       serviceAccountName: provisioner-sa
       containers:
       - name: platform-core
-        {{- with .Values.platform.core }}
-        image: {{ .image }}:{{ .tag }}
+        image: {{ .Values.platform.core.image }}:{{ .Values.platform.core.tag }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 4000
@@ -105,14 +104,10 @@ spec:
             port: 4000
           failureThreshold: 30
           periodSeconds: 30
+{{- if .Values.platform.core.resources  }}
         resources:
-            requests:
-               cpu: {{ .resources.requests.cpu }}
-               memory: {{ .resources.requests.memory }}
-            limits:
-               cpu: {{ .resources.limits.cpu }}
-               memory: {{ .resources.limits.memory }}
-        {{- end }}
+{{ toYaml .Values.platform.core.resources | indent 10 }}
+{{- end }}
       volumes:
         - name: cluster-storage
           persistentVolumeClaim:

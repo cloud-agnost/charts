@@ -28,93 +28,113 @@ engine:
   monitor:
     image: "gcr.io/agnost-community/engine/monitor"
     tag: "65fe6e2"
-    resources:
-      requests:
-        cpu: '50m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    resources: {}
+    #  requests:
+    #    cpu: '50m'
+    #    memory: '256Mi'
+    #  limits:
+    #    cpu: '1000m'
+    #    memory: '2Gi'
   realtime:
     image: "gcr.io/agnost-community/engine/realtime"
     tag: "65fe6e2"
-    resources:
-      targetCpuUtilization: 90
-      targetMemory: '250Mi'
-      requests:
-        cpu: '50m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    # You can enable Horizantal Pod Autoscaler for this deployment
+    # but it also requires resources to be set
+    #hpa:
+    #  targetCpuUtilization: 90
+    #  targetMemory: '250Mi'
+    resources: {}
+      #requests:
+      #  cpu: '50m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
     tag: "65fe6e2"
-    resources:
-      requests:
-        cpu: '50m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    resources: {}
+      #requests:
+      #  cpu: '50m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
     tag: "65fe6e2"
-    resources:
-      targetCpuUtilization: 90
-      targetMemory: '250Mi'
-      requests:
-        cpu: '100m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    # You can enable Horizantal Pod Autoscaler for this deployment
+    # but it also requires resources to be set
+    #hpa:
+    #  targetCpuUtilization: 90
+    #  targetMemory: '250Mi'
+    resources: {}
+      #requests:
+      #  cpu: '100m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
 
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
     tag: "65fe6e2"
-    resources:
-      targetCpuUtilization: 90
-      targetMemory: '250Mi'
-      requests:
-        cpu: '100m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    # You can enable Horizantal Pod Autoscaler for this deployment
+    # but it also requires resources to be set
+    #hpa:
+    #  targetCpuUtilization: 90
+    #  targetMemory: '250Mi'
+    resources: {}
+      #requests:
+      #  cpu: '100m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
   sync:
     image: "gcr.io/agnost-community/platform/sync"
     tag: "65fe6e2"
-    resources:
-      targetCpuUtilization: 90
-      targetMemory: '250Mi'
-      requests:
-        cpu: '50m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    # You can enable Horizantal Pod Autoscaler for this deployment
+    # but it also requires resources to be set
+    #hpa:
+    #  targetCpuUtilization: 90
+    #  targetMemory: '250Mi'
+    resources: {}
+      #requests:
+      #  cpu: '50m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
     tag: "65fe6e2"
-    resources:
-      targetCpuUtilization: 90
-      targetMemory: '250Mi'
-      requests:
-        cpu: '50m'
-        memory: '256Mi'
-      limits:
-        cpu: '1000m'
-        memory: '2Gi'
+    # You can enable Horizantal Pod Autoscaler for this deployment
+    # but it also requires resources to be set
+    #hpa:
+    #  targetCpuUtilization: 90
+    #  targetMemory: '250Mi'
+    resources: {}
+      #requests:
+      #  cpu: '50m'
+      #  memory: '256Mi'
+      #limits:
+      #  cpu: '1000m'
+      #  memory: '2Gi'
 
 studio:
   image: "gcr.io/agnost-community/studio"
   tag: "9450209"
-  resources:
-    requests:
-      cpu: '50m'
-      memory: '256Mi'
-    limits:
-      cpu: '1000m'
-      memory: '2Gi'
+  # You can enable Horizantal Pod Autoscaler for this deployment
+  # but it also requires resources to be set
+  #hpa:
+  #  targetCpuUtilization: 90
+  #  targetMemory: '250Mi'
+  resources: {}
+    #requests:
+    #  cpu: '50m'
+    #  memory: '256Mi'
+    #limits:
+    #  cpu: '1000m'
+    #  memory: '2Gi'

@@ -1,3 +1,4 @@
+{{- if and .Values.platform.sync.hpa .Values.platform.sync.resources }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -16,10 +17,11 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{ .Values.platform.sync.resources.targetCpuUtilization }}
+        averageUtilization: {{ .Values.platform.sync.hpa.targetCpuUtilization }}
   - type: Resource
     resource:
       name: memory
       target:
         type: AverageValue
-        averageValue: {{ .Values.platform.sync.resources.targetMemory }}
+        averageValue: {{ .Values.platform.sync.hpa.targetMemory }}
+{{- end }}

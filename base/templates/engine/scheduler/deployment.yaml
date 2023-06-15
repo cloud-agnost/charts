@@ -22,8 +22,7 @@ spec:
     spec:
       containers:
       - name: engine-scheduler
-        {{- with .Values.engine.scheduler }}
-        image: {{ .image }}:{{ .tag }}
+        image: {{ .Values.engine.scheduler.image }}:{{ .Values.engine.scheduler.tag }}
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 4000
@@ -91,11 +90,7 @@ spec:
             port: 4000
           failureThreshold: 30
           periodSeconds: 30
+{{- if .Values.engine.scheduler.resources  }}
         resources:
-            requests:
-               cpu: {{ .resources.requests.cpu }}
-               memory: {{ .resources.requests.memory }}
-            limits:
-               cpu: {{ .resources.limits.cpu }}
-               memory: {{ .resources.limits.memory }}
-        {{- end }}
+{{ toYaml .Values.engine.scheduler.resources | indent 10 }}
+{{- end }}

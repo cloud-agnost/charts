@@ -16,16 +16,11 @@ spec:
     spec:
       containers:
       - name: studio
-        {{- with .Values.studio }}
-        image: {{ .image }}:{{ .tag }}
+        image: {{ .Values.studio.image }}:{{ .Values.studio.tag }}
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4000
+{{- if .Values.studio.resources  }}
         resources:
-          requests:
-            cpu: {{ .resources.requests.cpu }}
-            memory: {{ .resources.requests.memory }}
-          limits:
-            cpu: {{ .resources.limits.cpu }}
-            memory: {{ .resources.limits.memory }}
-        {{- end }}
+{{ toYaml .Values.studio.resources | indent 10 }}
+{{- end }}
