@@ -1,5 +1,9 @@
 # Install Cloud Agnost Apps via Helm
 
+## Quickstart
+
+### Install
+
 First make sure that you have helm installed [here](https://helm.sh/docs/intro/install/)
 
 Then run the below commands:
