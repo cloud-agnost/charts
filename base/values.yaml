@@ -9,6 +9,15 @@ community-operator:
   community-operator-crds:
     enabled: false
 
+minio:
+  mode: standalone
+  existingSecret: "minio-credentials"
+  persistence:
+    size: 5Gi
+  resources:
+    requests:
+      memory: 1Gi
+
 # values for the bitnami redis chart
 redis:
   nameOverride: redis
