@@ -25,6 +25,7 @@ redis:
   master:
     persistence:
       size: 2Gi
+#  architecture: standalone   ## this disables replication
   replica:
     replicaCount: 1
     persistence:
