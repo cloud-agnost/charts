@@ -1381,7 +1381,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "73d96d1b"
 data:
-  ingress-class: "kourier.ingress.networking.knative.dev"
+  ingress-class: "nginx"
 
 ---
 # Copyright 2018 The Knative Authors
