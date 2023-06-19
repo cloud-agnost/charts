@@ -10,6 +10,8 @@ community-operator:
     enabled: false
 
 minio:
+  nameOverride: minio
+  fullnameOverride: minio
   mode: standalone
   existingSecret: "minio-credentials"
   persistence:
@@ -17,6 +19,13 @@ minio:
   resources:
     requests:
       memory: 1Gi
+  users:
+  ## Username, password and policy to be assigned to the user
+  ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
+  - accessKey: appUser
+    existingSecret: minio-credentials
+    existingSecretKey: userPassword
+    policy: readwrite
 
 # values for the bitnami redis chart
 redis:

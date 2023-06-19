@@ -82,6 +82,17 @@ spec:
                secretKeyRef:
                   name: cluster-secrets
                   key: accessToken
+          - name: MINIO_ENDPOINT
+            value: {{ .Values.minio.nameOverride }}.{{ .Release.Namespace }}
+          - name: MINIO_PORT
+            value: "9000"
+          - name: MINIO_ACCESS_KEY
+            value: appUser
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-credentials
+                key: userPassword
         volumeMounts:
           - name: cluster-storage
             mountPath: /storage
