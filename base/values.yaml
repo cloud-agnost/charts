@@ -25,11 +25,12 @@ redis:
   master:
     persistence:
       size: 2Gi
-#  architecture: standalone   ## this disables replication
-  replica:
-    replicaCount: 1
-    persistence:
-      size: 2Gi
+  architecture: standalone
+  # this can be set if "architecture: replication"
+  #replica:
+  #  replicaCount: 1
+  #  persistence:
+  #    size: 2Gi
   auth:
     existingSecret: redis-password
     existingSecretPasswordKey: password
