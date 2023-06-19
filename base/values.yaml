@@ -37,7 +37,7 @@ redis:
 engine:
   monitor:
     image: "gcr.io/agnost-community/engine/monitor"
-    tag: "65fe6e2"
+    tag: "817aa49"
     resources: {}
     #  requests:
     #    cpu: '50m'
@@ -47,7 +47,7 @@ engine:
     #    memory: '2Gi'
   realtime:
     image: "gcr.io/agnost-community/engine/realtime"
-    tag: "65fe6e2"
+    tag: "817aa49"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -62,7 +62,7 @@ engine:
       #  memory: '2Gi'
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
-    tag: "65fe6e2"
+    tag: "817aa49"
     resources: {}
       #requests:
       #  cpu: '50m'
@@ -72,7 +72,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "65fe6e2"
+    tag: "817aa49"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -89,7 +89,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "65fe6e2"
+    tag: "817aa49"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -104,7 +104,7 @@ platform:
       #  memory: '2Gi'
   sync:
     image: "gcr.io/agnost-community/platform/sync"
-    tag: "65fe6e2"
+    tag: "817aa49"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -119,7 +119,7 @@ platform:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
-    tag: "65fe6e2"
+    tag: "817aa49"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -135,7 +135,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "9450209"
+  tag: "817aa49"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
   #hpa:
