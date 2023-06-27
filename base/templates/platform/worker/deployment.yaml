@@ -20,6 +20,34 @@ spec:
       labels:
         app: platform-worker
     spec:
+      initContainers:
+      - name: wait-for-redis
+        image: redis:alpine
+        imagePullPolicy: IfNotPresent
+        args: [ 'sh', '-c', 'until redis-cli -h ${CACHE_HOSTNAME} -p 6379 -a ${CACHE_PWD} get hello; do echo "Sleeping a bit..."; sleep 3; done; echo "Redis is ready!";' ]
+        env:
+          - name: CACHE_HOSTNAME
+            value: redis-master
+          - name: CACHE_PWD
+            valueFrom:
+               secretKeyRef:
+                  name: redis-password
+                  key: password
+      - name: wait-for-rabbitmq
+        image: curlimages/curl:8.1.1
+        imagePullPolicy: IfNotPresent
+        args: [ 'sh', '-c', 'until [ "$(curl -s -u "${USER}:${PASS}" http://rabbitmq.{{ .Release.Namespace }}.svc:15672/api/aliveness-test/%2F)" == "{\"status\":\"ok\"}" ]; do echo "Sleeping a bit..."; sleep 3; done; echo "RabbitMQ is ready!";' ]
+        env:
+          - name: USER
+            valueFrom:
+               secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: username
+          - name: PASS
+            valueFrom:
+               secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: password
       containers:
       - name: platform-worker
         image: {{ .Values.platform.worker.image }}:{{ .Values.platform.worker.tag }}
@@ -49,18 +77,6 @@ spec:
                secretKeyRef:
                   name: rabbitmq-credentials
                   key: host
-          - name: CLUSTER_DB_URI
-            valueFrom:
-               secretKeyRef:
-                  name: cluster-secrets
-                  key: clusterDBURI
-          - name: CLUSTER_DB_USER
-            value: "mongo-user"
-          - name: CLUSTER_DB_PWD
-            valueFrom:
-               secretKeyRef:
-                  name: mongodb-admin-password
-                  key: password
           - name: MASTER_TOKEN
             valueFrom:
                secretKeyRef:

@@ -20,6 +20,19 @@ spec:
       labels:
         app: platform-sync
     spec:
+      initContainers:
+      - name: wait-for-redis
+        image: redis:alpine
+        imagePullPolicy: IfNotPresent
+        args: [ 'sh', '-c', 'until redis-cli -h ${CACHE_HOSTNAME} -p 6379 -a ${CACHE_PWD} get hello; do echo "Sleeping a bit..."; sleep 3; done; echo "Redis is ready!";' ]
+        env:
+          - name: CACHE_HOSTNAME
+            value: redis-master
+          - name: CACHE_PWD
+            valueFrom:
+               secretKeyRef:
+                  name: redis-password
+                  key: password
       containers:
       - name: platform-sync
         image: {{ .Values.platform.sync.image }}:{{ .Values.platform.sync.tag }}
