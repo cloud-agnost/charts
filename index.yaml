@@ -3,14 +3,14 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-06-19T16:40:22.497363786Z"
+    created: "2023-06-27T09:00:55.32315911Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
       version: 0.8.0
     - name: rabbitmq-cluster-operator
       repository: https://charts.bitnami.com/bitnami
-      version: 3.3.1
+      version: 3.4.2
     - name: redis
       repository: https://charts.bitnami.com/bitnami
       version: 17.10.2
@@ -18,9 +18,9 @@ entries:
       repository: https://charts.min.io
       version: 5.0.10
     description: Base installation for Cloud Agnost Apps
-    digest: 342126d6a2c137d98e1ab9a07c190679edefd28c18ec01d7ecca7cb841d01a91
+    digest: 43c84cc3330d9547deb282c69c7243dcbf62b5adea6ed8b66ebda1ade38fe2de
     name: base
     urls:
-    - https://cloud-agnost.github.io/charts/base-0.9.37.tgz
-    version: 0.9.37
-generated: "2023-06-19T16:40:22.479061959Z"
+    - https://cloud-agnost.github.io/charts/base-0.9.38.tgz
+    version: 0.9.38
+generated: "2023-06-27T09:00:55.30113566Z"
