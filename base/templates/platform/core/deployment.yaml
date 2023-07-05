@@ -138,9 +138,6 @@ spec:
               secretKeyRef:
                 name: minio-credentials
                 key: userPassword
-        volumeMounts:
-          - name: cluster-storage
-            mountPath: /storage
         livenessProbe:
           httpGet:
             path: /health
