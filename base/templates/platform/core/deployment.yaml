@@ -157,7 +157,4 @@ spec:
         resources:
 {{ toYaml .Values.platform.core.resources | indent 10 }}
 {{- end }}
-      volumes:
-        - name: cluster-storage
-          persistentVolumeClaim:
-            claimName: cluster-storage-pvc
+
