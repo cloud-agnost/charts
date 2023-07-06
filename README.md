@@ -2,6 +2,8 @@
 
 ## Quickstart
 
+> You need Kubernetes version 1.24 or above to make sure that all the components are working.
+
 ### Install
 
 First make sure that you have helm installed [here](https://helm.sh/docs/intro/install/)
