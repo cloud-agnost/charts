@@ -18,7 +18,7 @@ minio:
     size: 5Gi
   resources:
     requests:
-      memory: 1Gi
+      memory: 256Mi
   users:
   ## Username, password and policy to be assigned to the user
   ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]

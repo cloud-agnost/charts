@@ -31,9 +31,9 @@ spec:
               - command:
                   - sh
                   - -c
-                  - curl -L -v https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.11.1/rabbitmq_delayed_message_exchange-3.11.1.ez --output /community-plugins/rabbitmq_delayed_message_exchange-3.11.1.ez
-                image: curlimages/curl:8.1.1
-                imagePullPolicy: Always
+                  - cp /plugin/rabbitmq_delayed_message_exchange-3.11.1.ez /community-plugins/rabbitmq_delayed_message_exchange-3.11.1.ez
+                image: gcr.io/agnost-community/rabbitmq-community-plugin:v1.0.0
+                imagePullPolicy: IfNotPresent
                 name: copy-community-plugins
                 resources:
                   limits:
