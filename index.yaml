@@ -3,7 +3,32 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-08-04T13:01:26.765411139Z"
+    created: "2023-08-05T06:27:33.147615903Z"
+    dependencies:
+    - name: community-operator
+      repository: https://mongodb.github.io/helm-charts
+      version: 0.8.0
+    - name: rabbitmq-cluster-operator
+      repository: https://charts.bitnami.com/bitnami
+      version: 3.4.2
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.13
+    - name: postgres-operator
+      repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+      version: 1.10.0
+    description: Base installation for Cloud Agnost Apps
+    digest: 460463b677f5aea53f4159791b65f996c2ed78ab65ba2d9708cef5509a34b2b1
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.46.tgz
+    version: 0.9.46
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-08-05T06:27:33.12774396Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -23,4 +48,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.45.tgz
     version: 0.9.45
-generated: "2023-08-04T13:01:26.74677505Z"
+generated: "2023-08-05T06:27:33.107299011Z"
