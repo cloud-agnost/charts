@@ -31,13 +31,9 @@ jobs:
         run: |
           cd ./charts
           mkdir chart-files
-          for chart_name in base
-          do
-            helm package --dependency-update ${chart_name}
-            mv ${chart_name}-*.tgz chart-files
-          done
-          helm repo index chart-files --url https://cloud-agnost.github.io/charts/
-          mv chart-files/* ../pages/
+          helm package --dependency-update base
+          mv base-*.tgz  ../pages/
+          helm repo index ../pages/ --url https://cloud-agnost.github.io/charts/
           cp README.md ../pages/
       -
         name: Publish on Pages

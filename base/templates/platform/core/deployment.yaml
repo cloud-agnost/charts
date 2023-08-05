@@ -141,12 +141,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: minio-credentials
-                key: userName
+                key: rootUser
           - name: MINIO_SECRET_KEY
             valueFrom:
               secretKeyRef:
                 name: minio-credentials
-                key: userPassword
+                key: rootPassword
         livenessProbe:
           httpGet:
             path: /health
@@ -163,4 +163,3 @@ spec:
         resources:
 {{ toYaml .Values.platform.core.resources | indent 10 }}
 {{- end }}
-

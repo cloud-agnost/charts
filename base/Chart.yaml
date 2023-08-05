@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Base installation for Cloud Agnost Apps
-version: 0.9.45
+version: 0.9.46
 appVersion: 1.0.0
 dependencies:
 - name: community-operator
@@ -14,9 +14,8 @@ dependencies:
   version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
 - name: minio
-  version: "5.0.10"
+  version: "5.0.13"
   repository: https://charts.min.io
-# postgresql chart needed
-#- name: postgres-operator-charts
-#  version: "1.10.0"
-#  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+- name: postgres-operator
+  version: "1.10.0"
+  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator

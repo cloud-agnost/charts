@@ -15,17 +15,17 @@ minio:
   mode: standalone
   existingSecret: "minio-credentials"
   persistence:
-    size: 5Gi
+    size: 20Gi
   resources:
     requests:
       memory: 256Mi
-  users:
-  ## Username, password and policy to be assigned to the user
-  ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
-  - accessKey: appUser
-    existingSecret: minio-credentials
-    existingSecretKey: userPassword
-    policy: readwrite
+  users: []
+#  ## Username, password and policy to be assigned to the user
+#  ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
+#  - accessKey: appUser
+#    existingSecret: minio-credentials
+#    existingSecretKey: userPassword
+#    policy: readwrite
 
 # values for the bitnami redis chart
 redis:
@@ -158,3 +158,7 @@ studio:
     #limits:
     #  cpu: '1000m'
     #  memory: '2Gi'
+
+postgresql-operator:
+  configGeneral:
+    enable_crd_registration: false
