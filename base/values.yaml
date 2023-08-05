@@ -162,3 +162,18 @@ studio:
 postgresql-operator:
   configGeneral:
     enable_crd_registration: false
+
+mariadb-operator:
+  clusterName: mariadb.local
+  ha:
+    enabled: false
+    # below can be changed if ha is enabled
+    # replicas: 3
+    # leaseId: mariadb.montes.io
+  resources:
+    requests:
+      memory: 64Mi
+
+kafka-operator:
+  dashboards:
+    enabled: false
