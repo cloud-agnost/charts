@@ -47,7 +47,7 @@ redis:
 engine:
   monitor:
     image: "gcr.io/agnost-community/engine/monitor"
-    tag: "bd4de4c"
+    tag: "d0e1a2a"
     resources: {}
     #  requests:
     #    cpu: '50m'
@@ -57,7 +57,7 @@ engine:
     #    memory: '2Gi'
   realtime:
     image: "gcr.io/agnost-community/engine/realtime"
-    tag: "817aa49"
+    tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -72,7 +72,7 @@ engine:
       #  memory: '2Gi'
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
-    tag: "bd4de4c"
+    tag: "0026172"
     resources: {}
       #requests:
       #  cpu: '50m'
@@ -82,7 +82,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "bd4de4c"
+    tag: "d0e1a2a"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -99,7 +99,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "bd4de4c"
+    tag: "5216a82"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -114,7 +114,7 @@ platform:
       #  memory: '2Gi'
   sync:
     image: "gcr.io/agnost-community/platform/sync"
-    tag: "0ab99c2"
+    tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -129,7 +129,7 @@ platform:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
-    tag: "817aa49"
+    tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     #hpa:
@@ -159,11 +159,13 @@ studio:
     #  cpu: '1000m'
     #  memory: '2Gi'
 
-postgresql-operator:
+postgres-operator:
+  enabled: false
   configGeneral:
     enable_crd_registration: false
 
 mariadb-operator:
+  enabled: false
   clusterName: mariadb.local
   ha:
     enabled: false
@@ -174,6 +176,5 @@ mariadb-operator:
     requests:
       memory: 64Mi
 
-kafka-operator:
-  dashboards:
-    enabled: false
+kafka:
+  enabled: false

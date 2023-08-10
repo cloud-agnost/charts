@@ -122,6 +122,8 @@ spec:
                secretKeyRef:
                   name: cluster-secrets
                   key: passPhrase
+          - name: NAMESPACE
+            value: {{ .Release.Namespace }}
         livenessProbe:
           httpGet:
             path: /health

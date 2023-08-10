@@ -52,6 +52,8 @@ spec:
                secretKeyRef:
                   name: cluster-secrets
                   key: masterToken
+          - name: NAMESPACE
+            value: {{ .Release.Namespace }}
         livenessProbe:
           httpGet:
             path: /health

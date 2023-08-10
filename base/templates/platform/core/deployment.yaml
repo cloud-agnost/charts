@@ -147,6 +147,8 @@ spec:
               secretKeyRef:
                 name: minio-credentials
                 key: rootPassword
+          - name: NAMESPACE
+            value: {{ .Release.Namespace }}
         livenessProbe:
           httpGet:
             path: /health
