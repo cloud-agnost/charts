@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.47
+version: 0.9.48
 appVersion: 1.0.0
 dependencies:
 - name: community-operator
@@ -16,11 +16,3 @@ dependencies:
 - name: minio
   version: "5.0.13"
   repository: https://charts.min.io
-- name: postgres-operator
-  version: "1.10.0"
-  condition: postgres-operator.enabled
-  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
-- name: mariadb-operator
-  version: "0.19.0"
-  condition: mariadb-operator.enabled
-  repository: https://mariadb-operator.github.io/mariadb-operator

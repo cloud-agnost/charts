@@ -158,23 +158,3 @@ studio:
     #limits:
     #  cpu: '1000m'
     #  memory: '2Gi'
-
-postgres-operator:
-  enabled: false
-  configGeneral:
-    enable_crd_registration: false
-
-mariadb-operator:
-  enabled: false
-  clusterName: mariadb.local
-  ha:
-    enabled: false
-    # below can be changed if ha is enabled
-    # replicas: 3
-    # leaseId: mariadb.montes.io
-  resources:
-    requests:
-      memory: 64Mi
-
-kafka:
-  enabled: false
