@@ -1,0 +1,636 @@
+{{ $subjectName := include "mariadb-operator-webhook.subjectName" . }}
+{{ $altNames := include "mariadb-operator-webhook.altName" .  }}
+{{ $ca := genCA "mariadb-operator" 365 }}
+{{ $cert := genSignedCert $subjectName nil (list $altNames) 365 $ca }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator
+    app.kubernetes.io/instance: mariadb-operator
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mariadb-operator-webhook
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator-webhook
+    app.kubernetes.io/instance: mariadb-operator
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/tls
+metadata:
+  name: mariadb-operator-webhook-default-cert
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator-webhook
+    app.kubernetes.io/instance: mariadb-operator
+data:
+  tls.crt: {{ $cert.Cert | b64enc }}
+  tls.key: {{ $cert.Key | b64enc }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mariadb-operator
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - delete
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - backups
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - backups/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - backups/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - connections
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - connections
+  - restores
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - connections/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - connections/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - databases
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - databases/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - databases/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - grants
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - grants/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - grants/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - mariadbs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - mariadbs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - mariadbs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - restores
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - restores/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - restores/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - sqljobs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - sqljobs/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - sqljobs/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - users
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - users/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - mariadb.mmontes.io
+  resources:
+  - users/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
+  - rolebindings
+  - roles
+  verbs:
+  - create
+  - list
+  - patch
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: mariadb-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mariadb-operator
+subjects:
+- kind: ServiceAccount
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: mariadb-operator:auth-delegator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: mariadb-operator
+subjects:
+- kind: ServiceAccount
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-operator-webhook
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator-webhook
+    app.kubernetes.io/instance: mariadb-operator
+spec:
+  ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 10250
+  selector:
+    app.kubernetes.io/name: mariadb-operator-webhook
+    app.kubernetes.io/instance: mariadb-operator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator
+    app.kubernetes.io/instance: mariadb-operator
+spec:
+  selector:
+    matchLabels: 
+      app.kubernetes.io/name: mariadb-operator
+      app.kubernetes.io/instance: mariadb-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mariadb-operator
+        app.kubernetes.io/instance: mariadb-operator
+    spec:
+      serviceAccountName: mariadb-operator
+      automountServiceAccountToken: true
+      terminationGracePeriodSeconds: 10
+      containers:
+        - image: "ghcr.io/mariadb-operator/mariadb-operator:v0.0.19"
+          imagePullPolicy: IfNotPresent
+          name: controller
+          args:
+            - --metrics-addr=:8080
+            - --log-level=INFO
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: metrics
+          env: 
+            - name: CLUSTER_NAME
+              value: cluster.local
+            - name: MARIADB_OPERATOR_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.serviceAccountName
+            - name: MARIADB_OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MARIADB_OPERATOR_SA_PATH
+              value: /var/run/secrets/kubernetes.io/serviceaccount/token
+                    
+          resources:
+            
+            requests:
+              memory: 64Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-operator-webhook
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: mariadb-operator-webhook
+    app.kubernetes.io/instance: mariadb-operator
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mariadb-operator-webhook
+      app.kubernetes.io/instance: mariadb-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mariadb-operator-webhook
+        app.kubernetes.io/instance: mariadb-operator
+    spec:
+      serviceAccountName: mariadb-operator-webhook
+      automountServiceAccountToken: true
+      hostNetwork: false
+      containers:
+        - image: "ghcr.io/mariadb-operator/mariadb-operator:v0.0.19"
+          imagePullPolicy: IfNotPresent
+          name: webhook
+          args:
+            - webhook
+            - --cert-dir=/tmp/k8s-webhook-server/serving-certs
+            - --port=10250
+            - --metrics-addr=:8080
+            - --health-addr=:8081
+            - --log-level=INFO
+          ports:
+            - containerPort: 10250
+              protocol: TCP
+              name: https
+            - containerPort: 8080
+              protocol: TCP
+              name: metrics
+            - containerPort: 8081
+              protocol: TCP
+              name: health
+          volumeMounts:
+            - mountPath: /tmp/k8s-webhook-server/serving-certs
+              name: cert
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: mariadb-operator-webhook-default-cert

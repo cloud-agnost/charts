@@ -1,0 +1,196 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mongodb-database
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mongodb-kubernetes-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind:  ClusterRole 
+metadata:
+  name: mongodb-kubernetes-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  - configmaps
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mongodbcommunity.mongodb.com
+  resources:
+  - mongodbcommunity
+  - mongodbcommunity/status
+  - mongodbcommunity/spec
+  - mongodbcommunity/finalizers
+  verbs:
+  - get
+  - patch
+  - list
+  - update
+  - watch
+---
+kind:  ClusterRoleBinding 
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mongodb-kubernetes-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+subjects:
+- kind: ServiceAccount
+  name: mongodb-kubernetes-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+roleRef:
+  kind:  ClusterRole 
+  name: mongodb-kubernetes-operator
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: mongodb-database
+  namespace: {{ .Release.Namespace }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - patch
+      - delete
+      - get
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mongodb-database
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: mongodb-database
+roleRef:
+  kind: Role
+  name: mongodb-database
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    email: support@mongodb.com
+  labels:
+    owner: mongodb
+  name: mongodb-kubernetes-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mongodb-kubernetes-operator
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: mongodb-kubernetes-operator
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                      - mongodb-kubernetes-operator
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - command:
+            - /usr/local/bin/entrypoint
+          env:
+            - name: WATCH_NAMESPACE
+              value: "*"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: mongodb-kubernetes-operator
+            - name: AGENT_IMAGE
+              value: "quay.io/mongodb/mongodb-agent:12.0.25.7724-1"
+            - name: VERSION_UPGRADE_HOOK_IMAGE
+              value: "quay.io/mongodb/mongodb-kubernetes-operator-version-upgrade-post-start-hook:1.0.7"
+            - name: READINESS_PROBE_IMAGE
+              value: "quay.io/mongodb/mongodb-kubernetes-readinessprobe:1.0.15"
+            - name: MONGODB_IMAGE
+              value: mongo
+            - name: MONGODB_REPO_URL
+              value: docker.io
+          image: quay.io/mongodb/mongodb-kubernetes-operator:0.8.2
+          imagePullPolicy: Always
+          name: mongodb-kubernetes-operator
+          resources:
+            limits:
+              cpu: 1100m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 200Mi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+      serviceAccountName: mongodb-kubernetes-operator

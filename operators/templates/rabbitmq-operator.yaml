@@ -1,0 +1,1249 @@
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+automountServiceAccountToken: true
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+automountServiceAccountToken: true
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/validating-webhook-configuration.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVIakNDQXdhZ0F3SUJBZ0lSQVBFT25FUWw1OC9ZTlMxbTdXbDQ1ZTB3RFFZSktvWklodmNOQVFFTEJRQXcKSGpFY01Cb0dBMVVFQXhNVGNtMXhMVzF6WnkxMGIzQnZiRzluZVMxallUQWVGdzB5TXpBNU1EUXdOalE0TkRkYQpGdzB5TkRBNU1ETXdOalE0TkRkYU1Fa3hSekJGQmdOVkJBTVRQbkpoWW1KcGRHMXhMV05zZFhOMFpYSXRiM0JsCmNtRjBiM0l0Y21GaVltbDBiWEV0YldWemMyRm5hVzVuTFhSdmNHOXNiMmQ1TFc5d1pYSmhkRzl5TUlJQklqQU4KQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBeWxqdHp0bEMyN05GSlJHRy9nYlRiMU1vWTM3VgowTWZJODgwVzM2alZpMUhGdTFpYmF0dkQrQzA2a0NLS2hEMGZQZFUxelBodEdTanlWeDFaWXNkUldpS2ZpNngvCkhabmxsNS9wcjI1ckJJb2h2K2VyQTZ3cHd2SUEwTUQ3c1lEMC9nMVhWOTZXblZxdERZN0Mzc0l3ZlZtcHFCZDQKalM4RkpHVHlQeUllVm9qei9xeTRkMEVud3NOaFBMZHc1anFXcjh6b01VSSs2UjBFTzJxZ1RZU00xRmFyM2l6cQpFbzUwMFcrbUc5OVRIc216eG1GbjVXdWNaNTMzTTVNcTVJc1lhOUJtM3RWTWpDaHk2RXJSVVYwaWZlUllqeEZkClpJY2F1dGNrdnBIcC9oRndJYUZXSUxYaUNqTGhLYmoyUGNLNEJTamJqL1VEYVNyQ1J6RWN5UWJCbndJREFRQUIKbzRJQktqQ0NBU1l3RGdZRFZSMFBBUUgvQkFRREFnV2dNQjBHQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdncgpCZ0VGQlFjREFqQU1CZ05WSFJNQkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZHTVFLUm1qUnRRWmpvVEtIRW5MClg5ay9LTkxiTUlIRkJnTlZIUkVFZ2Iwd2dicUNWSEpoWW1KcGRHMXhMV05zZFhOMFpYSXRiM0JsY21GMGIzSXQKY21GaVltbDBiWEV0YldWemMyRm5hVzVuTFhSdmNHOXNiMmQ1TFc5d1pYSmhkRzl5TG5KaFltSnBkRzF4TFc5dwpaWEpoZEc5eUxuTjJZNEppY21GaVltbDBiWEV0WTJ4MWMzUmxjaTF2Y0dWeVlYUnZjaTF5WVdKaWFYUnRjUzF0ClpYTnpZV2RwYm1jdGRHOXdiMnh2WjNrdGIzQmxjbUYwYjNJdWNtRmlZbWwwYlhFdGIzQmxjbUYwYjNJdWMzWmoKTG1Oc2RYTjBaWEl1Ykc5allXd3dEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRVhhN09iQUtJcHhtT3RpMDlqOQpBclRPdHd3WTVoeVZoV2pjdXB2UlkxZDdjNGp1MGNGQXVJb2dRRWtWdzZLOEd2QnlNVnc4dGNkcmxtNXFpMUdPCitnTjNFYnBKaE16YUgwMUcyZXh0WWNjRWJTVWkvUGd5TUhtSHhvWUF0aHdsLzJneGdsRkpkZ3VmZ2NURnVvQngKVEthdmJjZTJBNHNrRHFaS2FEdCtrTGtzZWtnRG11QXV1cFYvOHlnOU5iczdjbDNNZUNEVVNiN01Ibk92MHZIKwo0VXhWOVJsWHI2bVZOUmtWbzhTN0FoQ1Q2Q1FyZTJVVFE4QjVsS2tKRG40aDh2OURWRHRkTzhrTjlJNXltOXhECmRuYmN1R3EyZEQ1dHFocjhLY2tSOFBtcFJJVUQwSTVOa3N0M085Y3VaZTA4R3Zyd3FSZFREdVJwdjJXV0YxN3oKdDRFPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBeWxqdHp0bEMyN05GSlJHRy9nYlRiMU1vWTM3VjBNZkk4ODBXMzZqVmkxSEZ1MWliCmF0dkQrQzA2a0NLS2hEMGZQZFUxelBodEdTanlWeDFaWXNkUldpS2ZpNngvSFpubGw1L3ByMjVyQklvaHYrZXIKQTZ3cHd2SUEwTUQ3c1lEMC9nMVhWOTZXblZxdERZN0Mzc0l3ZlZtcHFCZDRqUzhGSkdUeVB5SWVWb2p6L3F5NApkMEVud3NOaFBMZHc1anFXcjh6b01VSSs2UjBFTzJxZ1RZU00xRmFyM2l6cUVvNTAwVyttRzk5VEhzbXp4bUZuCjVXdWNaNTMzTTVNcTVJc1lhOUJtM3RWTWpDaHk2RXJSVVYwaWZlUllqeEZkWkljYXV0Y2t2cEhwL2hGd0lhRlcKSUxYaUNqTGhLYmoyUGNLNEJTamJqL1VEYVNyQ1J6RWN5UWJCbndJREFRQUJBb0lCQVFDQnRwaGI3WEtxbkRWTApHZjFMZ3R5dmxNTmpaTDkwWTE0eXk5cEo3bFZXUmtsWFcrbmxpcFFKMkJTZXFVWGFsOFFiUXo2Rjh3c2RBZDY0CmNad0hjblo0TFpIUlcvYnc1dU1EWEFQVjdoYTBoa2cwV1RLTDNDVzVUcUd2TU1jb2R0NldyYjY4R1hpN3pwRDUKQy9kb0RWeEFQdVkvVnl4MGRSdjZ4S3QyUlV6bGN5aW5YY2N0dEFaTEdITWlpYlNkVXJkbHpnQUZ6QmxFcFhlTApsdkpJOGhoVStaUzNqSVpwU1RnT2ZYTlViR2NMdUk1eUFPL284YytTRjRSNUJ4RktPRncrem5zeVA4TkV5MGxECkppYlJpaXIrUUtqOVhEOEs0OGwvMVVFMWRqd2JOQkp3blZ5aFNNd3JBdVJaaFJ2V3FidXFSSTZvSkY2UzNlek8KZCtMQjJoVGhBb0dCQU02RElXNUVwMzZraURQOHBCM2lHVmtpVkJndHAralBJaEd4SXEyOUZ4OUdNSlRDYmlDNQpFT2Y5Y21sdGFjZG5UVFpGaEpRQ1hoTWlvWnJYemM5QnpSVDhIL0ZiOWJwUmNSckFZZURmNkJha0ppTkFLUTRNClJ1Y3IzaVUxSTlHbnRGY2wrczVVMmozOHRvOEl2RC9Ca3h0U3RSOHlBQ3g5ejI0YnZZckVXUXFsQW9HQkFQclcKVEVxOHJ3bGdWMUNyLzVZbDVGTlF2Mi91M0NDZTA0SlhHdGdlZWd1L2hOSlhyRjlKalZZVi9CclFpUjhPaHpuWgpsbkxFL1VCUmw3cTA5VW1YVXoyR1NxOTMxcGVqRWU0UXdobDNiRDU1QjNUcGV0SE1zVVVjTGNMemI1akJVTTJYCkQyMnpOUWtvT3NoMlNZZ0htSHFyeGJNc2U2OHJoOG4zZ1pveWhWdnpBb0dCQUpPdHJuQitaQkRxZEFSSlBNdXAKN2xxUmMvVytZSDdaOFJFWnpTVFZQZjI5WWV4ZmhnV2NrbngwQUNkb2VPYUI5dk5DajJhUXN0bVlRRnpNeW43VwpIV1JPVUVGM2M2Z0RxWkJwMXhUS3lkdTNFeGJPUVEyc3RkK0d2VnQ2UHQwa3dwQTN0cjFxYkk4N2N3bWlRNHlNClR6aVEwcmsyTm0yYW9vV3BETWg1VlB1SkFvR0JBS1ZaR0VkMzQ2WTVwTFVmL0VZOHlpc0ZvbndscDJPMWJ0V1AKbDdsNU5aaUM4Z282RXYxcEhjcnVpUllmK3hQRzN1c0tmTHRCRVhRUmxRUlZmdys0dWYxbmhkbnZGRDAzR0gybQovRndQTmdKa2c3N1VuY3FvdFA1S21mdlZ2dTJpR1NLOC9rV2hDVWYxQmZMWXpwWGw4K1NCVUx4UWlXT3FQVU9zCmJQbDViaUZ6QW9HQUFTWFdOaFA0NjU1WUFYT25VUjJsS3ViOWFseFRnV2EzcHVQTWd0d05ZckdsUXgwRzR2K2EKQnNnSTMzUHU0RGFOSUU0UjFnZi9obUtUUmVTaTRVZERWSjNpVTZoVXkzK0MxenFoOWdMYnQvZFVHdGFyckZJbQpsNXVsVjlTQ0tmU205OVN4UGh0YnpaNXo5MUNrRnJRWjQrdVoxTzdxRnI5YzFZbUYyYlIvK0xRPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-operator
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - get
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - persistentvolumeclaims
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods/exec
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - rabbitmqclusters
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - rabbitmqclusters/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - rabbitmqclusters/status
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - rolebindings
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - get
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - create
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - bindings
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - bindings/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - exchanges
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - exchanges/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - federations
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - federations/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - permissions
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - permissions/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - policies
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - policies/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - queues
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - queues/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - rabbitmqclusters
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - rabbitmqclusters/status
+    verbs:
+      - get
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - schemareplications
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - schemareplications/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - shovels
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - shovels/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - superstreams
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - superstreams/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - users
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - users/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - vhosts
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - vhosts/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - topicpermissions
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - rabbitmq.com
+    resources:
+      - topicpermissions/status
+    verbs:
+      - get
+      - patch
+      - update
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rabbitmq-cluster-operator-rabbitmq-operator
+subjects:
+  - kind: ServiceAccount
+    name: rabbitmq-cluster-operator
+    {{- if eq .Release.Namespace "default" }}
+    namespace: operators
+    {{- else }}
+    namespace: {{ .Release.Namespace }}-operators
+    {{- end }}
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+subjects:
+  - kind: ServiceAccount
+    name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+    {{- if eq .Release.Namespace "default" }}
+    namespace: operators
+    {{- else }}
+    namespace: {{ .Release.Namespace }}-operators
+    {{- end }}
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+rules:
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+rules:
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rabbitmq-cluster-operator
+subjects:
+  - kind: ServiceAccount
+    name: rabbitmq-cluster-operator
+    {{- if eq .Release.Namespace "default" }}
+    namespace: operators
+    {{- else }}
+    namespace: {{ .Release.Namespace }}-operators
+    {{- end }}
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+subjects:
+  - kind: ServiceAccount
+    name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+    {{- if eq .Release.Namespace "default" }}
+    namespace: operators
+    {{- else }}
+    namespace: {{ .Release.Namespace }}-operators
+    {{- end }}
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/webhook-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http
+      port: 443
+      targetPort: http-webhook
+      protocol: TCP
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    app.kubernetes.io/component: messaging-topology-operator
+---
+# Source: rabbitmq-cluster-operator/templates/cluster-operator/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-cluster-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: rabbitmq-operator
+    app.kubernetes.io/part-of: rabbitmq
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rabbitmq-cluster-operator
+      app.kubernetes.io/name: rabbitmq-cluster-operator
+      app.kubernetes.io/component: rabbitmq-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rabbitmq-cluster-operator
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: rabbitmq-cluster-operator
+        helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+        app.kubernetes.io/component: rabbitmq-operator
+        app.kubernetes.io/part-of: rabbitmq
+    spec:
+      serviceAccountName: rabbitmq-cluster-operator
+      
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: rabbitmq-cluster-operator
+                    app.kubernetes.io/name: rabbitmq-cluster-operator
+                    app.kubernetes.io/component: rabbitmq-operator
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      initContainers:
+      containers:
+        - name: rabbitmq-cluster-operator
+          image: docker.io/bitnami/rabbitmq-cluster-operator:2.5.0-debian-11-r0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+          command:
+            - /manager
+          args:
+            - --metrics-bind-address=:9782
+          env:
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: DEFAULT_RABBITMQ_IMAGE
+              value: docker.io/bitnami/rabbitmq:3.11.22-debian-11-r2
+            - name: DEFAULT_USER_UPDATER_IMAGE
+              value: docker.io/bitnami/rmq-default-credential-updater:1.0.2-debian-11-r20
+          envFrom:
+          resources:
+            limits: {}
+            requests: {}
+          livenessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /metrics
+              port: http
+          readinessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /metrics
+              port: http
+          ports:
+            - name: http
+              containerPort: 9782
+              protocol: TCP
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+  {{- if eq .Release.Namespace "default" }}
+  namespace: operators
+  {{- else }}
+  namespace: {{ .Release.Namespace }}-operators
+  {{- end }}
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rabbitmq-cluster-operator
+      app.kubernetes.io/name: rabbitmq-cluster-operator
+      app.kubernetes.io/component: messaging-topology-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rabbitmq-cluster-operator
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: rabbitmq-cluster-operator
+        helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+        app.kubernetes.io/component: messaging-topology-operator
+        app.kubernetes.io/part-of: rabbitmq
+    spec:
+      serviceAccountName: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+      
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: rabbitmq-cluster-operator
+                    app.kubernetes.io/name: rabbitmq-cluster-operator
+                    app.kubernetes.io/component: messaging-topology-operator
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+      hostNetwork: false
+      dnsPolicy: ClusterFirst
+      initContainers:
+      containers:
+        - name: rabbitmq-cluster-operator
+          image: docker.io/bitnami/rmq-messaging-topology-operator:1.12.0-debian-11-r20
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+          command:
+            - /manager
+          args:
+            - --metrics-bind-address=:8080
+          env:
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          envFrom:
+          resources:
+            limits: {}
+            requests: {}
+          ports:
+            - name: http-webhook
+              containerPort: 9443
+              protocol: TCP
+            - name: http-metrics
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /metrics
+              port: http-metrics
+          readinessProbe:
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /metrics
+              port: http-metrics
+          volumeMounts:
+            - mountPath: /tmp/k8s-webhook-server/serving-certs
+              name: cert
+              readOnly: true
+      volumes:
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+---
+# Source: rabbitmq-cluster-operator/templates/messaging-topology-operator/validating-webhook-configuration.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  labels:
+    app.kubernetes.io/instance: rabbitmq-cluster-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: rabbitmq-cluster-operator
+    helm.sh/chart: rabbitmq-cluster-operator-3.7.2
+    app.kubernetes.io/component: messaging-topology-operator
+    app.kubernetes.io/part-of: rabbitmq
+  annotations:
+  name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+webhooks:
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-binding
+        port: 443
+    failurePolicy: Fail
+    name: vbinding.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - bindings
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-exchange
+        port: 443
+    failurePolicy: Fail
+    name: vexchange.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - exchanges
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-federation
+        port: 443
+    failurePolicy: Fail
+    name: vfederation.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - federations
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1alpha1-superstream
+        port: 443
+    failurePolicy: Fail
+    name: vsuperstream.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - superstreams
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-permission
+        port: 443
+    failurePolicy: Fail
+    name: vpermission.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - permissions
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-policy
+        port: 443
+    failurePolicy: Fail
+    name: vpolicy.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - policies
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-queue
+        port: 443
+    failurePolicy: Fail
+    name: vqueue.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - queues
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-schemareplication
+        port: 443
+    failurePolicy: Fail
+    name: vschemareplication.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - schemareplications
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-shovel
+        port: 443
+    failurePolicy: Fail
+    name: vshovel.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - shovels
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-user
+        port: 443
+    failurePolicy: Fail
+    name: vuser.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - users
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lRSDl5cGozM2c1ZXhFeDVJeFg0cGlmVEFOQmdrcWhraUc5dzBCQVFzRkFEQWUKTVJ3d0dnWURWUVFERXhOeWJYRXRiWE5uTFhSdmNHOXNiMmQ1TFdOaE1CNFhEVEl6TURrd05EQTJORGcwTmxvWApEVEkwTURrd016QTJORGcwTmxvd0hqRWNNQm9HQTFVRUF4TVRjbTF4TFcxelp5MTBiM0J2Ykc5bmVTMWpZVENDCkFTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTWwwQ3dVbjBFOFNmcWJtekIwd3dkR1gKK1NBSDAwWFRhNkJqYUU3MTlELzlabmRRT3hTMnFxT2FIQXluQU4xUlMrUGFOM0hSTWljYkcySjErK29BeGxEcwpLVzF3ekxOd2JScGJXQVd1MWVJNUFYSDZmbkNtRnIvSkZsS1ovajhJRitHcWF5VVNRUVRRejd6Q0tXbklzSHFsCkVSUWdwZGJiQ1dHQlRWUHBkbFhBYVZLdXNCT3A2Q0hiaGN1MXNhRDB3QXJlSWF0VVdIaXFwdm5GQ004SktKY20KbE5UcEhJVHEvNmpHeFZiTDdFYmtrTG5iYVV3RTlpM2dza0ZZdXZ5OWtkNVRPcEFEcU9KUWxhYUJyb2NDdTREbwpLa3pSTjU3NGRsRFA5WkxvRmtMQWl4L2VEcldUT0pDbHc1aWRHdjZiR3Y3ZThMaW5ZV1ozMlhndHhTOUZjNWtDCkF3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGQndNQkJnZ3IKQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlJqRUNrWm8wYlVHWTZFeWh4Sgp5MS9aUHlqUzJ6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFaT2JFVGg4cEdyalVkTHY1eURwYW93ckJ6RlRmCk1FZlk2MWFoR2s2YlU5bmNQaFRpUnhWbG85bU5mcSt5UGdnSEw0cUY3cWpmYWw5VFRkdXpzRUFlZEpsdG1PUzUKcTc2cy9yQkQ0WEhlSk5hUUQvaE15SXhpVDNPeU43OWtMczhac1VDeUtKaUYzZjd3Rk00Q2VaZHlVdzJuRVZJTgpSVUZ3TDJWNm85MWpsNm15ODhGV0JOUGhiTUo2U2FpbWhyK1ZTZEJEQ3c2dzRpbE81OEhOUXY2NW1jUTdaZEJOCkZhbFpvUlBTTXE3SXc4NU5uOFFOVmMwQzNTR0IrME5jY3FnR1liQ3NpSzJ5dW9taS9IdTltRUwyL1JrZm9LWVQKa2tRQXNMWk1od09Yd29vNHdvdjR6dDNVS3pCYitzR3RxbGdhcEFTaWlKenRZeEVMVmtCT3dHNk80QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+      service:
+        name: rabbitmq-cluster-operator-rabbitmq-messaging-topology-operator
+        {{- if eq .Release.Namespace "default" }}
+        namespace: operators
+        {{- else }}
+        namespace: {{ .Release.Namespace }}-operators
+        {{- end }}
+        path: /validate-rabbitmq-com-v1beta1-vhost
+        port: 443
+    failurePolicy: Fail
+    name: vvhost.kb.io
+    rules:
+      - apiGroups:
+          - rabbitmq.com
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - vhosts
+    sideEffects: None

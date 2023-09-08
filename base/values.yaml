@@ -4,11 +4,6 @@
 # - kind
 host: minikube
 
-# this is needed to install mongodb-community crd inside the chart via crds/ directory
-community-operator:
-  community-operator-crds:
-    enabled: false
-
 minio:
   nameOverride: minio
   fullnameOverride: minio
