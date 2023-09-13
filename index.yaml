@@ -3,7 +3,29 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.259180236Z"
+    created: "2023-09-13T10:19:12.626272517Z"
+    dependencies:
+    - name: namespace
+      repository: file://../namespace
+      version: 0.0.1
+    - name: operators
+      repository: file://../operators
+      version: 0.0.1
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.13
+    description: Cloud Agnost Applications Installation
+    digest: f9da83d296fcda37f76aec17d098191854ede181df4a0beb1b9f84195bb530b1
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.52.tgz
+    version: 0.9.52
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-09-13T10:19:12.603901849Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -25,7 +47,7 @@ entries:
     version: 0.9.51
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.237212086Z"
+    created: "2023-09-13T10:19:12.582325195Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -47,7 +69,7 @@ entries:
     version: 0.9.50
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.214537019Z"
+    created: "2023-09-13T10:19:12.559474219Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -69,7 +91,7 @@ entries:
     version: 0.9.49
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.192833876Z"
+    created: "2023-09-13T10:19:12.535890832Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -91,7 +113,7 @@ entries:
     version: 0.9.48
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.174441516Z"
+    created: "2023-09-13T10:19:12.51632731Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -121,7 +143,7 @@ entries:
     version: 0.9.47
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.142439016Z"
+    created: "2023-09-13T10:19:12.483073964Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -146,7 +168,7 @@ entries:
     version: 0.9.46
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-09T05:49:15.122255111Z"
+    created: "2023-09-13T10:19:12.463166137Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -166,4 +188,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.45.tgz
     version: 0.9.45
-generated: "2023-09-09T05:49:15.102894826Z"
+generated: "2023-09-13T10:19:12.443776018Z"
