@@ -55,12 +55,12 @@ engine:
     tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
-    #hpa:
-    #  targetCpuUtilization: 90
+    hpa:
+      targetCpuUtilization: 90
     #  targetMemory: '250Mi'
-    resources: {}
-      #requests:
-      #  cpu: '50m'
+    resources:
+      requests:
+        cpu: '100m'
       #  memory: '256Mi'
       #limits:
       #  cpu: '1000m'
@@ -80,12 +80,12 @@ engine:
     tag: "d0e1a2a"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
-    #hpa:
-    #  targetCpuUtilization: 90
+    hpa:
+      targetCpuUtilization: 90
     #  targetMemory: '250Mi'
-    resources: {}
-      #requests:
-      #  cpu: '100m'
+    resources:
+      requests:
+        cpu: '200m'
       #  memory: '256Mi'
       #limits:
       #  cpu: '1000m'
@@ -97,12 +97,12 @@ platform:
     tag: "5216a82"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
-    #hpa:
-    #  targetCpuUtilization: 90
+    hpa:
+      targetCpuUtilization: 90
     #  targetMemory: '250Mi'
-    resources: {}
-      #requests:
-      #  cpu: '100m'
+    resources:
+      requests:
+        cpu: '200m'
       #  memory: '256Mi'
       #limits:
       #  cpu: '1000m'
@@ -112,12 +112,12 @@ platform:
     tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
-    #hpa:
-    #  targetCpuUtilization: 90
+    hpa:
+      targetCpuUtilization: 90
     #  targetMemory: '250Mi'
-    resources: {}
-      #requests:
-      #  cpu: '50m'
+    resources:
+      requests:
+        cpu: '100m'
       #  memory: '256Mi'
       #limits:
       #  cpu: '1000m'
@@ -127,12 +127,12 @@ platform:
     tag: "0026172"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
-    #hpa:
-    #  targetCpuUtilization: 90
+    hpa:
+      targetCpuUtilization: 90
     #  targetMemory: '250Mi'
-    resources: {}
-      #requests:
-      #  cpu: '50m'
+    resources:
+      requests:
+        cpu: '50m'
       #  memory: '256Mi'
       #limits:
       #  cpu: '1000m'
@@ -143,12 +143,12 @@ studio:
   tag: "817aa49"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
-  #hpa:
-  #  targetCpuUtilization: 90
+  hpa:
+    targetCpuUtilization: 90
   #  targetMemory: '250Mi'
-  resources: {}
-    #requests:
-    #  cpu: '50m'
+  resources:
+    requests:
+      cpu: '100m'
     #  memory: '256Mi'
     #limits:
     #  cpu: '1000m'
