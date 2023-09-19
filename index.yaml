@@ -3,7 +3,29 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.605273499Z"
+    created: "2023-09-19T14:10:05.401866027Z"
+    dependencies:
+    - name: namespace
+      repository: file://../namespace
+      version: 0.0.1
+    - name: operators
+      repository: file://../operators
+      version: 0.0.1
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.13
+    description: Cloud Agnost Applications Installation
+    digest: 0f945a8a8dc304c954d091971ff69b8ef7a99f722507d9c56023d58f174e5422
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.54.tgz
+    version: 0.9.54
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-09-19T14:10:05.379812264Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -25,7 +47,7 @@ entries:
     version: 0.9.53
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.581551903Z"
+    created: "2023-09-19T14:10:05.359758389Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -47,7 +69,7 @@ entries:
     version: 0.9.52
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.556029178Z"
+    created: "2023-09-19T14:10:05.337168329Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -69,7 +91,7 @@ entries:
     version: 0.9.51
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.533085395Z"
+    created: "2023-09-19T14:10:05.31436857Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -91,7 +113,7 @@ entries:
     version: 0.9.50
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.509478302Z"
+    created: "2023-09-19T14:10:05.291704411Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -113,7 +135,7 @@ entries:
     version: 0.9.49
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.487513435Z"
+    created: "2023-09-19T14:10:05.269407849Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -135,7 +157,7 @@ entries:
     version: 0.9.48
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.466547786Z"
+    created: "2023-09-19T14:10:05.251195062Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -165,7 +187,7 @@ entries:
     version: 0.9.47
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.435117962Z"
+    created: "2023-09-19T14:10:05.221193649Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -190,7 +212,7 @@ entries:
     version: 0.9.46
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-17T17:46:05.413719105Z"
+    created: "2023-09-19T14:10:05.201013474Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -210,4 +232,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.45.tgz
     version: 0.9.45
-generated: "2023-09-17T17:46:05.39423268Z"
+generated: "2023-09-19T14:10:05.18221969Z"
