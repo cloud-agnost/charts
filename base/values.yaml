@@ -22,6 +22,11 @@ minio:
 #    existingSecretKey: userPassword
 #    policy: readwrite
 
+mongodbcommunity:
+  storage:
+    dataVolumeSize: 5Gi
+    logVolumeSize: 1Gi
+
 # values for the bitnami redis chart
 redis:
   nameOverride: redis

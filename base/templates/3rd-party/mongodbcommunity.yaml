@@ -28,6 +28,21 @@ spec:
       selector:
         matchLabels:
           app: mongodb-svc
+      volumeClaimTemplates:
+        - metadata:
+            name: data-volume
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: {{ .Values.mongodbcommunity.storage.dataVolumeSize }}
+        - metadata:
+            name: logs-volume
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: {{ .Values.mongodbcommunity.storage.logVolumeSize }}
       template:
         metadata:
           labels:
