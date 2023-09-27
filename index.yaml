@@ -3,7 +3,29 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.149030089Z"
+    created: "2023-09-27T12:49:06.046972231Z"
+    dependencies:
+    - name: namespace
+      repository: file://../namespace
+      version: 0.0.1
+    - name: operators
+      repository: file://../operators
+      version: 0.0.1
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.13
+    description: Cloud Agnost Applications Installation
+    digest: 578d7703e71183eba4ebe5ccfd1aebc2a14fb3148a7cc1c1eea4a9404bf06859
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.57.tgz
+    version: 0.9.57
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-09-27T12:49:06.025491063Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -25,7 +47,7 @@ entries:
     version: 0.9.56
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.125625979Z"
+    created: "2023-09-27T12:49:06.001976587Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -47,7 +69,7 @@ entries:
     version: 0.9.55
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.10215467Z"
+    created: "2023-09-27T12:49:05.979487016Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -69,7 +91,7 @@ entries:
     version: 0.9.54
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.077535565Z"
+    created: "2023-09-27T12:49:05.957678746Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -91,7 +113,7 @@ entries:
     version: 0.9.53
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.054301754Z"
+    created: "2023-09-27T12:49:05.936162777Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -113,7 +135,7 @@ entries:
     version: 0.9.52
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.031731341Z"
+    created: "2023-09-27T12:49:05.913134104Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -135,7 +157,7 @@ entries:
     version: 0.9.51
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:51.008172932Z"
+    created: "2023-09-27T12:49:05.892593338Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -157,7 +179,7 @@ entries:
     version: 0.9.50
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:50.983907026Z"
+    created: "2023-09-27T12:49:05.871000069Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -179,7 +201,7 @@ entries:
     version: 0.9.49
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:50.960398717Z"
+    created: "2023-09-27T12:49:05.849699601Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -201,7 +223,7 @@ entries:
     version: 0.9.48
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:50.94142069Z"
+    created: "2023-09-27T12:49:05.831230942Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -231,7 +253,7 @@ entries:
     version: 0.9.47
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:50.907350722Z"
+    created: "2023-09-27T12:49:05.796970933Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -256,7 +278,7 @@ entries:
     version: 0.9.46
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-09-24T05:39:50.887638798Z"
+    created: "2023-09-27T12:49:05.776968569Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -276,4 +298,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.45.tgz
     version: 0.9.45
-generated: "2023-09-24T05:39:50.868663071Z"
+generated: "2023-09-27T12:49:05.758290309Z"
