@@ -71,9 +71,15 @@ Then you can reach your app via the IP address of your ingress:
 
 ```bash
 # get the IP address of the Ingress
-$> kubectl get ingress base-cloud-agnost
-NAME                CLASS    HOSTS   ADDRESS        PORTS   AGE
-base-cloud-agnost   <none>   *       192.168.49.2   80      5m8s
+$> kubectl get ingress -n agnost
+NAME                      CLASS    HOSTS   ADDRESS        PORTS   AGE
+engine-realtime-ingress   <none>   *       192.168.49.2   80      35m
+platform-core-ingress     <none>   *       192.168.49.2   80      35m
+platform-sync-ingress     <none>   *       192.168.49.2   80      35m
+studio-ingress            <none>   *       192.168.49.2   80      35m
+
+# or to get it via script:
+kubectl get ingress engine-realtime-ingress -n agnost -o jsonpath='{.status.loadBalancer.ingress[].ip}'
 ```
 
 Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
@@ -89,7 +95,7 @@ $> microk8s enable ingress
 Then, you can reach your app via the Ingress IP address:
 
 ```bash
-$> kubectl get ingress base-cloud-agnost
+$> kubectl get ingress -A
 ```
 
 ### Docker Desktop

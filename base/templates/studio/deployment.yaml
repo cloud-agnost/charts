@@ -14,6 +14,11 @@ spec:
       labels:
         app: studio
     spec:
+      initContainers:
+      - name: wait-for-platform-core
+        image: curlimages/curl:8.1.1
+        imagePullPolicy: IfNotPresent
+        args: [ 'sh', '-c', 'until [[ "$(curl -s http://platform-core-clusterip-service.{{ .Release.Namespace }}.svc:4000/ping)" == *"Pong!" ]]; do echo "Sleeping a bit..."; sleep 3; done; echo "platform-core is ready!";' ]
       containers:
       - name: studio
         image: {{ .Values.studio.image }}:{{ .Values.studio.tag }}
