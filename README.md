@@ -2,6 +2,7 @@
 
 ## Quickstart
 
+> [!WARNING]
 > You need Kubernetes version 1.24 or above to make sure that all the components are working.
 
 ### Install
@@ -65,6 +66,7 @@ $> minikube addons disable storage-provisioner
 $> minikube addons disable default-storageclass
 
 $> kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+$> kubectl patch storageclass csi-hostpath-sc -p '{"allowVolumeExpansion":true}'
 ```
 
 Then you can reach your app via the IP address of your ingress:
