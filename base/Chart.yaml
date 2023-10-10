@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.58
+version: 0.9.59
 appVersion: 1.0.0
 dependencies:
 - name: namespace
@@ -16,3 +16,6 @@ dependencies:
 - name: minio
   version: "5.0.13"
   repository: https://charts.min.io
+- name: cert-manager
+  version: "v1.13.1"
+  repository: https://charts.jetstack.io

@@ -4,6 +4,11 @@
 # - kind
 host: minikube
 
+cert-manager:
+  namespace: cert-manager
+  startupapicheck:
+    enabled: false
+
 minio:
   nameOverride: minio
   fullnameOverride: minio

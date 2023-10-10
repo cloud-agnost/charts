@@ -4,7 +4,6 @@ metadata:
    name: engine-realtime-ingress
    namespace: {{ .Release.Namespace }}
    annotations:
-      kubernetes.io/ingress.class: 'nginx'
       nginx.ingress.kubernetes.io/proxy-body-size: 500m
       nginx.ingress.kubernetes.io/proxy-connect-timeout: '6000'
       nginx.ingress.kubernetes.io/proxy-send-timeout: '6000'
@@ -12,11 +11,12 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: '6000'
       nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+   ingressClassName: nginx
    rules:
       - http:
            paths:
               - path: /realtime/(.*)
-                pathType: Prefix
+                pathType: ImplementationSpecific
                 backend:
                    service:
                       name: engine-realtime-clusterip-service

@@ -6,3 +6,8 @@ metadata:
   {{- else }}
   name: {{ .Release.Namespace }}-operators
   {{- end }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
