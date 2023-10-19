@@ -84,6 +84,8 @@ spec:
                   key: masterToken
           - name: NAMESPACE
             value: {{ .Release.Namespace }}
+          - name: RELEASE_NUMBER
+            value: {{ .Chart.AppVersion }}
         livenessProbe:
           httpGet:
             path: /health

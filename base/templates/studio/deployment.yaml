@@ -25,6 +25,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 4000
+        env:
+          - name: RELEASE_NUMBER
+            value: {{ .Chart.AppVersion }}
 {{- if .Values.studio.resources  }}
         resources:
 {{ toYaml .Values.studio.resources | indent 10 }}
