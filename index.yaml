@@ -3,7 +3,32 @@ entries:
   base:
   - apiVersion: v2
     appVersion: v2
-    created: "2023-10-19T05:59:31.621036321Z"
+    created: "2023-10-19T06:18:59.64884694Z"
+    dependencies:
+    - name: namespace
+      repository: file://../namespace
+      version: 0.0.1
+    - name: operators
+      repository: file://../operators
+      version: 0.0.1
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.13
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.13.1
+    description: Cloud Agnost Applications Installation
+    digest: e95d97f6bcff68077a318085b80459c2449ffe94a86125b4e432175ed9dcd96c
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.64.tgz
+    version: 0.9.64
+  - apiVersion: v2
+    appVersion: v2
+    created: "2023-10-19T06:18:59.621151408Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -28,7 +53,7 @@ entries:
     version: 0.9.63
   - apiVersion: v2
     appVersion: v1
-    created: "2023-10-19T05:59:31.58861191Z"
+    created: "2023-10-19T06:18:59.592531258Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -53,7 +78,7 @@ entries:
     version: 0.9.62
   - apiVersion: v2
     appVersion: v2
-    created: "2023-10-19T05:59:31.552920477Z"
+    created: "2023-10-19T06:18:59.564147013Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -78,7 +103,7 @@ entries:
     version: 0.9.61
   - apiVersion: v2
     appVersion: v1
-    created: "2023-10-19T05:59:31.516892542Z"
+    created: "2023-10-19T06:18:59.537088793Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -103,7 +128,7 @@ entries:
     version: 0.9.60
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.484237729Z"
+    created: "2023-10-19T06:18:59.509372861Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -128,7 +153,7 @@ entries:
     version: 0.9.59
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.449428501Z"
+    created: "2023-10-19T06:18:59.483611566Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -150,7 +175,7 @@ entries:
     version: 0.9.58
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.421335118Z"
+    created: "2023-10-19T06:18:59.460224117Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -172,7 +197,7 @@ entries:
     version: 0.9.57
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.394345642Z"
+    created: "2023-10-19T06:18:59.437770486Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -194,7 +219,7 @@ entries:
     version: 0.9.56
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.368812175Z"
+    created: "2023-10-19T06:18:59.41717009Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -216,7 +241,7 @@ entries:
     version: 0.9.55
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.340942993Z"
+    created: "2023-10-19T06:18:59.396263388Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -238,7 +263,7 @@ entries:
     version: 0.9.54
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.314541521Z"
+    created: "2023-10-19T06:18:59.374561671Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -260,7 +285,7 @@ entries:
     version: 0.9.53
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.286195936Z"
+    created: "2023-10-19T06:18:59.35263975Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -282,7 +307,7 @@ entries:
     version: 0.9.52
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.261143873Z"
+    created: "2023-10-19T06:18:59.329382103Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -304,7 +329,7 @@ entries:
     version: 0.9.51
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.233944295Z"
+    created: "2023-10-19T06:18:59.308687006Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -326,7 +351,7 @@ entries:
     version: 0.9.50
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.205003106Z"
+    created: "2023-10-19T06:18:59.284997751Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -348,7 +373,7 @@ entries:
     version: 0.9.49
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.173872503Z"
+    created: "2023-10-19T06:18:59.25894675Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -370,7 +395,7 @@ entries:
     version: 0.9.48
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.149751446Z"
+    created: "2023-10-19T06:18:59.241519116Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -400,7 +425,7 @@ entries:
     version: 0.9.47
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.102823039Z"
+    created: "2023-10-19T06:18:59.205632126Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -425,7 +450,7 @@ entries:
     version: 0.9.46
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-10-19T05:59:31.077548974Z"
+    created: "2023-10-19T06:18:59.184190514Z"
     dependencies:
     - name: community-operator
       repository: https://mongodb.github.io/helm-charts
@@ -445,4 +470,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.45.tgz
     version: 0.9.45
-generated: "2023-10-19T05:59:31.052056508Z"
+generated: "2023-10-19T06:18:59.165425654Z"
