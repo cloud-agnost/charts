@@ -19,7 +19,7 @@ dependencies:
 - name: cert-manager
   version: "v1.13.1"
   repository: https://charts.jetstack.io
-- name: nginx-ingress
+- name: ingress-nginx
   version: "4.8.2"
   repository: "file://../ingress-nginx"
   condition: ingress.enabled
