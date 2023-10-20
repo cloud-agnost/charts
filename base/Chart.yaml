@@ -1,9 +1,13 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.67
+version: 0.9.68
 appVersion: v2
 dependencies:
+- name: ingress-nginx
+  version: "4.8.2"
+  repository: "file://../ingress-nginx"
+  condition: ingress.enabled
 - name: namespace
   version: "0.0.1"
   repository: "file://../namespace"
@@ -19,7 +23,3 @@ dependencies:
 - name: cert-manager
   version: "v1.13.1"
   repository: https://charts.jetstack.io
-- name: ingress-nginx
-  version: "4.8.2"
-  repository: "file://../ingress-nginx"
-  condition: ingress.enabled
