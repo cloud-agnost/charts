@@ -4,6 +4,9 @@
 # - kind
 host: minikube
 
+ingress:
+  enabled: false
+
 cert-manager:
   namespace: cert-manager
   startupapicheck:
