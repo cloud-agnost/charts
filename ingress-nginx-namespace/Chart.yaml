@@ -1,5 +1,0 @@
-apiVersion: v2
-name: ingress-nginx-namespace
-description: Cloud Agnost Dependent Namespace
-version: 0.0.1
-appVersion: 1.0.0

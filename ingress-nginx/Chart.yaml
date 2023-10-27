@@ -21,7 +21,3 @@ name: ingress-nginx
 sources:
 - https://github.com/kubernetes/ingress-nginx
 version: 4.8.2
-dependencies:
-  - name: ingress-nginx-namespace
-    version: "0.0.1"
-    repository: "file://../ingress-nginx-namespace"
