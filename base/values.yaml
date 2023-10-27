@@ -4,7 +4,7 @@
 # - kind
 host: minikube
 
-ingress:
+ingressController:
   enabled: false
 
 cert-manager:
