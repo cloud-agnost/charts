@@ -328,13 +328,7 @@ spec:
         env:
         - name: POSTGRES_OPERATOR_CONFIGURATION_OBJECT
           value: postgres-operator
-        resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 250Mi
+        resources: {}
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
