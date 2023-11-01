@@ -12,7 +12,7 @@ dependencies:
   repository: "file://../ingress-nginx"
   condition: ingressController.enabled
 - name: operators
-  version: "0.0.1"
+  version: "0.0.2"
   repository: "file://../operators"
 - name: redis
   version: "17.10.2"
