@@ -96,7 +96,7 @@ If you already have docker desktop running and you're using the Kubernetes that 
 ```bash
 # Docker Desktop Kubenetes does not have ingress plugin, so you can install it via the chart:
 $> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-                --set ingressController.enabled=true
+                --set ingress-nginx.enabled=true
 ```
 
 ### Kind
@@ -118,10 +118,11 @@ Then, you can reach your app via the Ingress IP address:
 $> kubectl get ingress -A
 ```
 
+### AKS (Azure Kubernetes Service)
 
+Azure requires an annotation for Ingress, here is how to install it:
 
-### Install
-
-
-
-
+```bash
+$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+                --set ingress-nginx.enabled=true,ingress-nginx.platform=AKS
+```
