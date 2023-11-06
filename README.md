@@ -5,43 +5,20 @@
 > [!WARNING]
 > You need Kubernetes version 1.24 or above to make sure that all the components are working.
 
-### Install
+## Environment Specific Installation Instructions
 
-First make sure that you have helm installed [here](https://helm.sh/docs/intro/install/)
+> [!WARNING]
+> First, make sure that you have helm installed described [here](https://helm.sh/docs/intro/install/)
 
-Then run the below commands:
+Add the repo:
 
 ```bash
 # Add helm repo
-helm repo add cloud-agnost https://cloud-agnost.github.io/charts
+$> helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 
-# Install the chart on MiniKube:
-helm install agnost cloud-agnost/base --namespace agnost --create-namespace
-
-## if you are installing on a docker-desktop
-helm install agnost cloud-agnost/base --namespace agnost --create-namespace --set host=dockerdesktop
-
-# check the pods status, make sure that mongodb, rabbitmq, and redis are running:
-# it takes around 5 minutes (depending on your local resources and internet connection)
-kubectl get pods -n agnost
-NAME                                           READY   STATUS    RESTARTS      AGE
-engine-monitor-deployment-6d5569878f-nrg7q     1/1     Running   0             8m8s
-engine-realtime-deployment-955f6c77b-2wx52     1/1     Running   0             8m8s
-engine-scheduler-deployment-775879f956-fq4sc   1/1     Running   0             8m8s
-engine-worker-deployment-76d94cd4c9-9hsjc      1/1     Running   0             8m8s
-minio-594ff4f778-hvk4t                         1/1     Running   0             8m8s
-mongodb-0                                      2/2     Running   0             7m57s
-platform-core-deployment-5f79d59868-9jrbm      1/1     Running   0             8m8s
-platform-sync-deployment-7c8bf79df6-h2prc      1/1     Running   0             8m8s
-platform-worker-deployment-868cb59558-rv86h    1/1     Running   0             8m8s
-rabbitmq-server-0                              1/1     Running   0             7m49s
-redis-master-0                                 1/1     Running   0             8m8s
-studio-deployment-7fdccfc77f-pxsfj             1/1     Running   0             8m8s
+# Update helm repos
+$> helm repo update
 ```
-
-You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml).
-
-## Environment Specific Instructions
 
 ### Minikube
 
@@ -69,6 +46,32 @@ $> kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"
 $> kubectl patch storageclass csi-hostpath-sc -p '{"allowVolumeExpansion":true}'
 ```
 
+Then run the below commands:
+
+```bash
+# Install the chart on Kubernetes:
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace
+
+# check the pods status, make sure that mongodb, rabbitmq, and redis are running:
+# it takes around 5 minutes (depending on your local resources and internet connection)
+kubectl get pods -n agnost
+NAME                                           READY   STATUS    RESTARTS      AGE
+engine-monitor-deployment-6d5569878f-nrg7q     1/1     Running   0             8m8s
+engine-realtime-deployment-955f6c77b-2wx52     1/1     Running   0             8m8s
+engine-scheduler-deployment-775879f956-fq4sc   1/1     Running   0             8m8s
+engine-worker-deployment-76d94cd4c9-9hsjc      1/1     Running   0             8m8s
+minio-594ff4f778-hvk4t                         1/1     Running   0             8m8s
+mongodb-0                                      2/2     Running   0             7m57s
+platform-core-deployment-5f79d59868-9jrbm      1/1     Running   0             8m8s
+platform-sync-deployment-7c8bf79df6-h2prc      1/1     Running   0             8m8s
+platform-worker-deployment-868cb59558-rv86h    1/1     Running   0             8m8s
+rabbitmq-server-0                              1/1     Running   0             7m49s
+redis-master-0                                 1/1     Running   0             8m8s
+studio-deployment-7fdccfc77f-pxsfj             1/1     Running   0             8m8s
+```
+
+You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml).
+
 Then you can reach your app via the IP address of your ingress:
 
 ```bash
@@ -86,6 +89,21 @@ kubectl get ingress engine-realtime-ingress -n agnost -o jsonpath='{.status.load
 
 Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
 
+### Docker Desktop
+
+If you already have docker desktop running and you're using the Kubernetes that is shipped with it:
+
+```bash
+# Docker Desktop Kubenetes does not have ingress plugin, so you can install it via the chart:
+$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+                --set ingressController.enabled=true
+```
+
+### Kind
+
+It is similar to `Docker Desktop` setup, you need to install NGINX Ingress controller provided with the chart.
+
+
 ### MicroK8s
 
 If you haven't done already, you need to enable ingress addon:
@@ -100,24 +118,10 @@ Then, you can reach your app via the Ingress IP address:
 $> kubectl get ingress -A
 ```
 
-### Docker Desktop
 
-If you already have docker desktop running and you're using the Kubernetes that is shipped with it:
 
- 1. First install NGINX Ingress (or any other ingress controller of your choice):
+### Install
 
-    ```bash
-    $> helm upgrade --install ingress-nginx ingress-nginx \
-        --repo https://kubernetes.github.io/ingress-nginx \
-        --namespace ingress-nginx --create-namespace
-    ```
 
- 2. Once the Ingress controller is installed, you can directly access the application via `http://localhost`
 
-### Kind
 
-It is similar to `Docker Desktop` setup, you first need to install your favourite Ingress controller, then reach your app via browser.
-
-### K3S
-
-K3S deploys Traefik ingress by default, you should be able to access the apps directly on the service IP address.
