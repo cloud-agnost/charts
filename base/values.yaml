@@ -1,5 +1,9 @@
-ingressController:
+ingress-nginx:
   enabled: false
+  # Platform running the ingress, annotations needed for Azure Kubernetes Service
+  # Possible values:
+  # - AKS
+  platform: ""
 
 cert-manager:
   namespace: cert-manager

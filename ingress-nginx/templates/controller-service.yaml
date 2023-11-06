@@ -6,6 +6,9 @@ metadata:
   {{- range $key, $value := .Values.controller.service.annotations }}
     {{ $key }}: {{ tpl ($value | toString) $ | quote }}
   {{- end }}
+  {{- if eq .Values.platform "AKS" }}
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+  {{- end }}
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: controller
