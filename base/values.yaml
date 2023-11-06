@@ -1,9 +1,3 @@
-# Kubernetes platform. Values can be:
-# - minikube (default)
-# - dockerdesktop
-# - kind
-host: minikube
-
 ingressController:
   enabled: false
 

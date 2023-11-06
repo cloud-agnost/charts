@@ -54,8 +54,8 @@ spec:
             - name: mongod
               resources:
                 limits:
-                  cpu: 1000m
-                  memory: 1Gi
+                  cpu: 100m
+                  memory: 512Mi
                 requests:
                   cpu: 1000m
                   memory: 1Gi
@@ -71,8 +71,8 @@ spec:
                 timeoutSeconds: 20
               resources:
                 limits:
-                  cpu: 100m
-                  memory: 256Mi
+                  cpu: 50m
+                  memory: 128Mi
                 requests:
                   cpu: 100m
                   memory: 256Mi
