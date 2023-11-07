@@ -15,8 +15,6 @@ Add the repo:
 ```bash
 # Add helm repo
 $> helm repo add cloud-agnost https://cloud-agnost.github.io/charts
-
-# Update helm repos
 $> helm repo update
 ```
 
@@ -116,10 +114,24 @@ If you haven't done already, you need to enable ingress addon:
 $> microk8s enable ingress
 ```
 
+```bash
+# Install the chart
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace
+```
+
 Then, you can reach your app via the Ingress IP address:
 
 ```bash
 $> kubectl get ingress -A
+```
+
+### EKS (AWS Elastic Kubernetes Service)
+
+AWS requires an annotation for Ingress, here is how to install it:
+
+```bash
+$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+                --set ingress-nginx.enabled=true,ingress-nginx.platform=EKS
 ```
 
 ### AKS (Azure Kubernetes Service)
@@ -129,4 +141,13 @@ Azure requires an annotation for Ingress, here is how to install it:
 ```bash
 $> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
                 --set ingress-nginx.enabled=true,ingress-nginx.platform=AKS
+```
+
+### DOKS (DigitalOcean Kubernetes)
+
+Digital Ocean requires an annotation for Ingress, here is how to install it:
+
+```bash
+$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+                --set ingress-nginx.enabled=true,ingress-nginx.platform=DOKS
 ```
