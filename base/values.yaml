@@ -1,8 +1,11 @@
 ingress-nginx:
   enabled: false
-  # Platform running the ingress, annotations needed for Azure Kubernetes Service
+  # Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
+  # Azure Kubernetes Service and Digital Ocean Kubernetes
   # Possible values:
   # - AKS
+  # - DOKS
+  # - EKS
   platform: ""
 
 cert-manager:

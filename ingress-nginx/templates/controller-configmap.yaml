@@ -14,6 +14,9 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
+{{- if eq .Values.platform "DOKS" }}
+  use-proxy-protocol: "true"
+{{- end }}
 {{- if .Values.controller.addHeaders }}
   add-headers: {{ .Values.namespace }}/{{ include "ingress-nginx.fullname" . }}-custom-add-headers
 {{- end }}
