@@ -9,7 +9,6 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-send-timeout: '6000'
       nginx.ingress.kubernetes.io/proxy-read-timeout: '6000'
       nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: '6000'
-      nginx.ingress.kubernetes.io/default-backend: studio-clusterip-service
       nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
    ingressClassName: nginx

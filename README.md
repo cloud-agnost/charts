@@ -20,6 +20,10 @@ $> helm repo add cloud-agnost https://cloud-agnost.github.io/charts
 $> helm repo update
 ```
 
+> [!WARNING]
+> This chart requires 2400 milicores of CPU and 4Gi of memory. Therefore, we recommend at least 4 CPUs and 8 GBs of memory in the cluster.
+> If you plan to have more services (e.g. PostgreSQL database or RabbitMQ queue), then you will need more resources.
+
 ### Minikube
 
 On minikube, if you haven't done already, you need to enable ingress, volumesnapshots, and csi-hostpath-driver addons:
