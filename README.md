@@ -77,16 +77,13 @@ You can configure the settings based on [base values.yaml](https://github.com/cl
 Then you can reach your app via the IP address of your ingress:
 
 ```bash
-# get the IP address of the Ingress
-$> kubectl get ingress -n agnost
-NAME                      CLASS    HOSTS   ADDRESS        PORTS   AGE
-engine-realtime-ingress   <none>   *       192.168.49.2   80      35m
-platform-core-ingress     <none>   *       192.168.49.2   80      35m
-platform-sync-ingress     <none>   *       192.168.49.2   80      35m
-studio-ingress            <none>   *       192.168.49.2   80      35m
+# get the IP address of the Ingress --> EXTERNAL-IP field
+$> kubectl get svc -n ingress-nginx
+NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
+agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   209.38.176.156   80:30323/TCP,443:31819/TCP   7m1s
 
 # or to get it via script:
-kubectl get ingress engine-realtime-ingress -n agnost -o jsonpath='{.status.loadBalancer.ingress[].ip}'
+kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].ip}'
 ```
 
 Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
@@ -97,8 +94,8 @@ If you already have docker desktop running and you're using the Kubernetes that 
 
 ```bash
 # Docker Desktop Kubenetes does not have ingress plugin, so you can install it via the chart:
-$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-                --set ingress-nginx.enabled=true
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set ingress-nginx.enabled=true
 ```
 
 ### Kind
@@ -111,7 +108,7 @@ It is similar to `Docker Desktop` setup, you need to install NGINX Ingress contr
 If you haven't done already, you need to enable ingress addon:
 
 ```bash
-$> microk8s enable ingress
+microk8s enable ingress
 ```
 
 ```bash
@@ -122,7 +119,7 @@ helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-name
 Then, you can reach your app via the Ingress IP address:
 
 ```bash
-$> kubectl get ingress -A
+kubectl get ingress -A
 ```
 
 ### EKS (AWS Elastic Kubernetes Service)
@@ -130,8 +127,8 @@ $> kubectl get ingress -A
 AWS requires an annotation for Ingress, here is how to install it:
 
 ```bash
-$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-                --set ingress-nginx.enabled=true,ingress-nginx.platform=EKS
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set ingress-nginx.enabled=true,ingress-nginx.platform=EKS
 ```
 
 ### AKS (Azure Kubernetes Service)
@@ -139,8 +136,8 @@ $> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-n
 Azure requires an annotation for Ingress, here is how to install it:
 
 ```bash
-$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-                --set ingress-nginx.enabled=true,ingress-nginx.platform=AKS
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set ingress-nginx.enabled=true,ingress-nginx.platform=AKS
 ```
 
 ### DOKS (DigitalOcean Kubernetes)
@@ -148,6 +145,6 @@ $> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-n
 Digital Ocean requires an annotation for Ingress, here is how to install it:
 
 ```bash
-$> helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-                --set ingress-nginx.enabled=true,ingress-nginx.platform=DOKS
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set ingress-nginx.enabled=true,ingress-nginx.platform=DOKS
 ```
