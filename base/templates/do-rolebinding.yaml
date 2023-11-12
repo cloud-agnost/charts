@@ -1,4 +1,4 @@
-{{- if eq .Values.platform "DOKS" }}
+{{- if eq .Values.ingress-nginx.platform "DOKS" }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
