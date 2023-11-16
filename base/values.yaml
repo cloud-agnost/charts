@@ -152,4 +152,18 @@ platform:
       #  cpu: '1000m'
       #  memory: '2Gi'
 
-studio: v1.0.1
+studio:
+  image: "gcr.io/agnost-community/studio"
+  tag: "v1.0.1"
+  # You can enable Horizantal Pod Autoscaler for this deployment
+  # but it also requires resources to be set
+  hpa:
+    targetCpuUtilization: 90
+  #  targetMemory: '250Mi'
+  resources:
+    requests:
+      cpu: '100m'
+    #  memory: '256Mi'
+    #limits:
+    #  cpu: '1000m'
+    #  memory: '2Gi'
