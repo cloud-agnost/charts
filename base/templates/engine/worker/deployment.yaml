@@ -122,6 +122,11 @@ spec:
                secretKeyRef:
                   name: cluster-secrets
                   key: passPhrase
+          - name: CLUSTER_ACCESS_TOKEN
+            valueFrom:
+               secretKeyRef:
+                  name: cluster-secrets
+                  key: clusterAcessToken
           - name: JWT_SECRET
             valueFrom:
                secretKeyRef:
