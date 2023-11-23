@@ -1,5 +1,5 @@
 ingress-nginx:
-  enabled: false
+  enabled: true
   # Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
   # Azure Kubernetes Service and Digital Ocean Kubernetes
   # Possible values:

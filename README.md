@@ -14,13 +14,16 @@ Add the repo:
 
 ```bash
 # Add helm repo
-$> helm repo add cloud-agnost https://cloud-agnost.github.io/charts
-$> helm repo update
+helm repo add cloud-agnost https://cloud-agnost.github.io/charts
+helm repo update
 ```
 
 > [!WARNING]
 > This chart requires 2400 milicores of CPU and 4Gi of memory. Therefore, we recommend at least 4 CPUs and 8 GBs of memory in the cluster.
 > If you plan to have more services (e.g. PostgreSQL database or RabbitMQ queue), then you will need more resources.
+
+> [!WARNING]
+> If you already have NGINX ingress running on your cluster, make sure to disable it's deployment with `--set ingress-nginx.enabled=false` flag
 
 ### Minikube
 
@@ -52,7 +55,8 @@ Then run the below commands:
 
 ```bash
 # Install the chart on Kubernetes:
-helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set ingress-nginx.enabled=false
 
 # check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 # it takes around 5 minutes (depending on your local resources and internet connection)
@@ -80,7 +84,7 @@ Then you can reach your app via the IP address of your ingress:
 # get the IP address of the Ingress --> EXTERNAL-IP field
 $> kubectl get svc -n ingress-nginx
 NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   209.38.176.156   80:30323/TCP,443:31819/TCP   7m1s
+agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   192.168.49.2     80:30323/TCP,443:31819/TCP   7m1s
 
 # or to get it via script:
 kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].ip}'
@@ -98,28 +102,12 @@ helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-name
              --set ingress-nginx.enabled=true
 ```
 
-### Kind
+### GKE (Google Kubernetes Engine)
 
-It is similar to `Docker Desktop` setup, you need to install NGINX Ingress controller provided with the chart.
-
-
-### MicroK8s
-
-If you haven't done already, you need to enable ingress addon:
+GKE does not need extra configuration, just install the chart:
 
 ```bash
-microk8s enable ingress
-```
-
-```bash
-# Install the chart
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace
-```
-
-Then, you can reach your app via the Ingress IP address:
-
-```bash
-kubectl get ingress -A
 ```
 
 ### EKS (AWS Elastic Kubernetes Service)
@@ -128,7 +116,7 @@ AWS requires an annotation for Ingress, here is how to install it:
 
 ```bash
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.enabled=true,ingress-nginx.platform=EKS
+             --set ingress-nginx.platform=EKS
 ```
 
 ### AKS (Azure Kubernetes Service)
@@ -137,7 +125,7 @@ Azure requires an annotation for Ingress, here is how to install it:
 
 ```bash
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.enabled=true,ingress-nginx.platform=AKS
+             --set ingress-nginx.platform=AKS
 ```
 
 ### DOKS (DigitalOcean Kubernetes)
@@ -146,5 +134,20 @@ Digital Ocean requires an annotation for Ingress, here is how to install it:
 
 ```bash
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.enabled=true,ingress-nginx.platform=DOKS
+             --set ingress-nginx.platform=DOKS
 ```
+
+## Accessing Services
+
+If you need to access to the services running on Kubernetes, you need to run `kubectl port-forward` command.
+Example:
+
+```bash
+# you can access to the database from `localhost:27017` after running this:
+kubectl port-forward mongodb-0 -n agnost 27017:27017
+```
+
+Similar can be done for redis, rabbitmq, and other services.
+
+More information can be found [here](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+
