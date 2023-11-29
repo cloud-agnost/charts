@@ -24,16 +24,31 @@ $> kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"
 $> kubectl patch storageclass csi-hostpath-sc -p '{"allowVolumeExpansion":true}'
 ```
 
+Add the repo and continue with your Kubernetes Platform's documentation:
+
+```bash
+helm repo add cloud-agnost https://cloud-agnost.github.io/charts
+helm repo update
+```
+
 Then run the below commands:
+
+> [!TIP]
+> Below commands create `agnost` namespace to install applications and `agnost-operators` namespace to install 3rd party software operators.
+> You can skip the `--namespace` and `--create-namespace` options.
+> In this case, the installation will be performed on the `default` and `operators` namespaces.
 
 ```bash
 # Install the chart on Kubernetes:
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
              --set ingress-nginx.enabled=false
+```
 
-# check the pods status, make sure that mongodb, rabbitmq, and redis are running:
-# it takes around 5 minutes (depending on your local resources and internet connection)
-kubectl get pods -n agnost
+Check the pods status, make sure that mongodb, rabbitmq, and redis are running:
+It takes around 5 minutes (depending on your local resources and internet connection)
+
+```bash
+$> kubectl get pods -n agnost
 NAME                                           READY   STATUS    RESTARTS      AGE
 engine-monitor-deployment-6d5569878f-nrg7q     1/1     Running   0             8m8s
 engine-realtime-deployment-955f6c77b-2wx52     1/1     Running   0             8m8s

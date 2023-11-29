@@ -1,5 +1,12 @@
 ingress-nginx:
   enabled: true
+  controller:
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 10
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
   # Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
   # Azure Kubernetes Service and Digital Ocean Kubernetes
   # Possible values:
