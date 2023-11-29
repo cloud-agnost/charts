@@ -44,16 +44,16 @@ studio-deployment-7fdccfc77f-pxsfj             1/1     Running   0             8
 
 You can configure the settings based on [base values.yaml](https://github.com/cloud-agnost/charts/blob/master/base/values.yaml).
 
-Then you can reach your app via the IP address of your ingress:
+Then you can reach your app via the hostname of your ingress:
 
 ```bash
-# get the IP address of the Ingress --> EXTERNAL-IP field
+# get the hostname of the Ingress --> EXTERNAL-IP field
 $> kubectl get svc -n ingress-nginx
-NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   192.168.49.2     80:30323/TCP,443:31819/TCP   7m1s
+NAME                              TYPE           CLUSTER-IP       EXTERNAL-IP                                                                        PORT(S)                      AGE
+agnost-ingress-nginx-controller   LoadBalancer   172.20.168.126   a0eec90a0caef4b1abe0ea62a95d26dd-87c7083fa6813baf.elb.eu-central-1.amazonaws.com   80:30084/TCP,443:31671/TCP   59m
 
 # or to get it via script:
-kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].ip}'
+kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].hostname}'
 ```
 
-Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
+Then open your browser and access to the address (`http://a0eec90a0caef4b1abe0ea62a95d26dd-87c7083fa6813baf.elb.eu-central-1.amazonaws.com` for the given example above)
