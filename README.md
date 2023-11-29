@@ -37,3 +37,47 @@ kubectl port-forward mongodb-0 -n agnost 27017:27017
 Similar can be done for redis, rabbitmq, and other services.
 
 More information can be found [here](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+
+## Wildcard Certificates
+
+If you would like to create a wildcard certificate for your domain with `cert-manager` and `let's encrypt`, then you need to use `DNS-01` challange. This requires credentials to access your DNS provider.
+
+More information with some examples can be found on [cert-manager documentation](https://cert-manager.io/docs/configuration/acme/dns01/)
+
+After you successfully created your `Issuer`, then you need to update the ingress objects as given example below:
+
+```yaml
+## example for studio-ingress
+## all ingresses need to be updated!
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: studio-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '6000'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '6000'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '6000'
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: '6000'
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    # add an annotation indicating the issuer to use.
+    cert-manager.io/cluster-issuer: nameOfClusterIssuer
+spec:
+  ingressClassName: nginx
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+    - hosts:
+        - example.com
+      secretName: myingress-cert # < cert-manager will store the created certificate in this secret.
+  rules:
+    - host:
+      http:
+        paths:
+          - path: /(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: studio-clusterip-service
+                port:
+                  number: 4000
+```
