@@ -7,6 +7,11 @@ ingress-nginx:
       maxReplicas: 10
       targetCPUUtilizationPercentage: 80
       targetMemoryUtilizationPercentage: 80
+    resources:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+
   # Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
   # Azure Kubernetes Service and Digital Ocean Kubernetes
   # Possible values:
