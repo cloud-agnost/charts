@@ -1,8 +1,8 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.137
-appVersion: v1.0.44
+version: 0.9.138
+appVersion: v1.0.45
 dependencies:
 - name: namespace
   version: "0.0.1"
