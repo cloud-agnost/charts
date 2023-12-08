@@ -120,7 +120,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "v1.0.32"
+    tag: "v1.0.33"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     hpa:
@@ -166,7 +166,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "v1.0.20"
+  tag: "v1.0.21"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
   hpa:
