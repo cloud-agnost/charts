@@ -8,7 +8,7 @@ dependencies:
   version: "0.0.1"
   repository: "file://../namespace"
 - name: ingress-nginx
-  version: "4.8.2"
+  version: "4.8.4"
   repository: "file://../ingress-nginx"
   condition: ingress-nginx.enabled
 - name: operators
@@ -18,8 +18,12 @@ dependencies:
   version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
 - name: minio
-  version: "5.0.13"
+  version: "5.0.14"
   repository: https://charts.min.io
 - name: cert-manager
   version: "v1.13.1"
   repository: https://charts.jetstack.io
+- name: zot
+  version: "0.1.40"
+  repository: https://zotregistry.io/helm-charts/
+  condition: zot.enabled
