@@ -48,6 +48,11 @@ minio:
     purge: false
     versioning: false
     objectlocking: false
+  - name: "nixpacks"
+    policy: none
+    purge: false
+    versioning: false
+    objectlocking: false
 
 mongodbcommunity:
   storage:
@@ -187,7 +192,7 @@ studio:
     #  memory: '2Gi'
 
 zot:
-  enabled: false
+  enabled: true
   replicaCount: 1
   service:
     type: NodePort
