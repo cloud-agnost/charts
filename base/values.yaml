@@ -114,7 +114,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "v1.0.44"
+    tag: "v1.0.45"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     hpa:
@@ -131,7 +131,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "1.0.62"
+    tag: "1.0.63"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     hpa:
@@ -177,7 +177,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "v1.0.54"
+  tag: "v1.0.55"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
   hpa:
