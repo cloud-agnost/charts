@@ -11,9 +11,6 @@
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAcessToken.+" | replace "clusterAcessToken" "Cluster Access Token  " }}
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Engine Access Token   " }}
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "masterToken.+" | replace "masterToken" "Platform Access Token " }}
-{{- if .Values.zot.enabled }}
-Zot Registry Password : {{ derivePassword 1 "maximum" .Release.Name .Chart.Name (lookup "v1" "Service" "default" "kubernetes").metadata.creationTimestamp | b64enc | trimSuffix "=" }}
-{{- end }}
 
 📣  As a next step, you need to finalize your cluster set-up by creating your user account through Agnost Studio. 
 📣  To launch Agnost Studio, type the URL or IP address of your cluster on your browser (e.g., http(s)://<your cluster URL or IP>). 

@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.229
+version: 0.9.230
 appVersion: 'v1.0.130'
 dependencies:
 - name: namespace
@@ -23,7 +23,3 @@ dependencies:
 - name: cert-manager
   version: "v1.13.3"
   repository: https://charts.jetstack.io
-- name: zot
-  version: "0.1.42"
-  repository: https://zotregistry.io/helm-charts/
-  condition: zot.enabled
