@@ -1,7 +1,7 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.243
+version: 0.9.244
 appVersion: 'v1.0.143'
 dependencies:
 - name: namespace
@@ -12,7 +12,7 @@ dependencies:
   repository: "file://../ingress-nginx"
   condition: ingress-nginx.enabled
 - name: operators
-  version: "0.0.2"
+  version: "0.0.3"
   repository: "file://../operators"
 - name: redis
   version: "17.10.2"
