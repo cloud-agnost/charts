@@ -1,6 +1,8 @@
 ingress-nginx:
   enabled: true
   controller:
+    service:
+      externalTrafficPolicy: Local
     autoscaling:
       enabled: true
       minReplicas: 1
