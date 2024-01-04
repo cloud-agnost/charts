@@ -167,7 +167,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "v1.0.63"
+  tag: "v1.0.64"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
   hpa:
