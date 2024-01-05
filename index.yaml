@@ -3,7 +3,36 @@ entries:
   base:
   - apiVersion: v2
     appVersion: v1.0.155
-    created: "2024-01-05T09:21:02.463753504Z"
+    created: "2024-01-05T12:56:17.359847407Z"
+    dependencies:
+    - name: namespace
+      repository: file://../namespace
+      version: 0.0.1
+    - condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: file://../ingress-nginx
+      version: 4.8.4
+    - name: operators
+      repository: file://../operators
+      version: 0.0.3
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.10.2
+    - name: minio
+      repository: https://charts.min.io
+      version: 5.0.14
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.13.3
+    description: Cloud Agnost Applications Installation
+    digest: 07eb76a0c6b460ec4a98f6c3ec69b7b6040c965162ea47309a0d5b0465a785c2
+    name: base
+    urls:
+    - https://cloud-agnost.github.io/charts/base-0.9.258.tgz
+    version: 0.9.258
+  - apiVersion: v2
+    appVersion: v1.0.155
+    created: "2024-01-05T12:56:17.342399448Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -32,7 +61,7 @@ entries:
     version: 0.9.257
   - apiVersion: v2
     appVersion: v1.0.154
-    created: "2024-01-05T09:21:02.445292761Z"
+    created: "2024-01-05T12:56:17.325065773Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -61,7 +90,7 @@ entries:
     version: 0.9.256
   - apiVersion: v2
     appVersion: v1.0.153
-    created: "2024-01-05T09:21:02.426963805Z"
+    created: "2024-01-05T12:56:17.307811845Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -90,7 +119,7 @@ entries:
     version: 0.9.255
   - apiVersion: v2
     appVersion: v1.0.152
-    created: "2024-01-05T09:21:02.410122248Z"
+    created: "2024-01-05T12:56:17.290936416Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -119,7 +148,7 @@ entries:
     version: 0.9.254
   - apiVersion: v2
     appVersion: v1.0.151
-    created: "2024-01-05T09:21:02.392661709Z"
+    created: "2024-01-05T12:56:17.273393112Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -148,7 +177,7 @@ entries:
     version: 0.9.253
   - apiVersion: v2
     appVersion: v1.0.151
-    created: "2024-01-05T09:21:02.375711541Z"
+    created: "2024-01-05T12:56:17.25742208Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -177,7 +206,7 @@ entries:
     version: 0.9.252
   - apiVersion: v2
     appVersion: v1.0.150
-    created: "2024-01-05T09:21:02.35842668Z"
+    created: "2024-01-05T12:56:17.239316953Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -206,7 +235,7 @@ entries:
     version: 0.9.251
   - apiVersion: v2
     appVersion: v1.0.149
-    created: "2024-01-05T09:21:02.341182114Z"
+    created: "2024-01-05T12:56:17.221283718Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -235,7 +264,7 @@ entries:
     version: 0.9.250
   - apiVersion: v2
     appVersion: v1.0.148
-    created: "2024-01-05T09:21:02.323937134Z"
+    created: "2024-01-05T12:56:17.20492839Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -264,7 +293,7 @@ entries:
     version: 0.9.249
   - apiVersion: v2
     appVersion: v1.0.147
-    created: "2024-01-05T09:21:02.306521044Z"
+    created: "2024-01-05T12:56:17.188872805Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -293,7 +322,7 @@ entries:
     version: 0.9.248
   - apiVersion: v2
     appVersion: v1.0.146
-    created: "2024-01-05T09:21:02.288692778Z"
+    created: "2024-01-05T12:56:17.171281603Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -322,7 +351,7 @@ entries:
     version: 0.9.247
   - apiVersion: v2
     appVersion: v1.0.145
-    created: "2024-01-05T09:21:02.269878217Z"
+    created: "2024-01-05T12:56:17.154286575Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -351,7 +380,7 @@ entries:
     version: 0.9.246
   - apiVersion: v2
     appVersion: v1.0.144
-    created: "2024-01-05T09:21:02.252599796Z"
+    created: "2024-01-05T12:56:17.135906349Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -380,7 +409,7 @@ entries:
     version: 0.9.245
   - apiVersion: v2
     appVersion: v1.0.143
-    created: "2024-01-05T09:21:02.236502521Z"
+    created: "2024-01-05T12:56:17.118377482Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -409,7 +438,7 @@ entries:
     version: 0.9.244
   - apiVersion: v2
     appVersion: v1.0.143
-    created: "2024-01-05T09:21:02.21856106Z"
+    created: "2024-01-05T12:56:17.101129393Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -438,7 +467,7 @@ entries:
     version: 0.9.243
   - apiVersion: v2
     appVersion: v1.0.142
-    created: "2024-01-05T09:21:02.197010457Z"
+    created: "2024-01-05T12:56:17.080947614Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -467,7 +496,7 @@ entries:
     version: 0.9.242
   - apiVersion: v2
     appVersion: v1.0.141
-    created: "2024-01-05T09:21:02.175769486Z"
+    created: "2024-01-05T12:56:17.061187966Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -496,7 +525,7 @@ entries:
     version: 0.9.241
   - apiVersion: v2
     appVersion: v1.0.140
-    created: "2024-01-05T09:21:02.155487537Z"
+    created: "2024-01-05T12:56:17.03993115Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -525,7 +554,7 @@ entries:
     version: 0.9.240
   - apiVersion: v2
     appVersion: v1.0.139
-    created: "2024-01-05T09:21:02.134820642Z"
+    created: "2024-01-05T12:56:17.019634025Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -554,7 +583,7 @@ entries:
     version: 0.9.239
   - apiVersion: v2
     appVersion: v1.0.138
-    created: "2024-01-05T09:21:02.11339502Z"
+    created: "2024-01-05T12:56:16.999112861Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -583,7 +612,7 @@ entries:
     version: 0.9.238
   - apiVersion: v2
     appVersion: v1.0.137
-    created: "2024-01-05T09:21:02.091296067Z"
+    created: "2024-01-05T12:56:16.978363822Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -612,7 +641,7 @@ entries:
     version: 0.9.237
   - apiVersion: v2
     appVersion: v1.0.136
-    created: "2024-01-05T09:21:02.067942849Z"
+    created: "2024-01-05T12:56:16.95831879Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -641,7 +670,7 @@ entries:
     version: 0.9.236
   - apiVersion: v2
     appVersion: v1.0.135
-    created: "2024-01-05T09:21:02.047146353Z"
+    created: "2024-01-05T12:56:16.938758644Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -670,7 +699,7 @@ entries:
     version: 0.9.235
   - apiVersion: v2
     appVersion: v1.0.134
-    created: "2024-01-05T09:21:02.026359606Z"
+    created: "2024-01-05T12:56:16.917065362Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -699,7 +728,7 @@ entries:
     version: 0.9.234
   - apiVersion: v2
     appVersion: v1.0.133
-    created: "2024-01-05T09:21:02.00246952Z"
+    created: "2024-01-05T12:56:16.896127619Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -728,7 +757,7 @@ entries:
     version: 0.9.233
   - apiVersion: v2
     appVersion: v1.0.132
-    created: "2024-01-05T09:21:01.974721643Z"
+    created: "2024-01-05T12:56:16.87524063Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -757,7 +786,7 @@ entries:
     version: 0.9.232
   - apiVersion: v2
     appVersion: v1.0.131
-    created: "2024-01-05T09:21:01.950212547Z"
+    created: "2024-01-05T12:56:16.855877266Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -786,7 +815,7 @@ entries:
     version: 0.9.231
   - apiVersion: v2
     appVersion: v1.0.130
-    created: "2024-01-05T09:21:01.926637143Z"
+    created: "2024-01-05T12:56:16.835209245Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -815,7 +844,7 @@ entries:
     version: 0.9.230
   - apiVersion: v2
     appVersion: v1.0.130
-    created: "2024-01-05T09:21:01.906275884Z"
+    created: "2024-01-05T12:56:16.814898739Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -848,7 +877,7 @@ entries:
     version: 0.9.229
   - apiVersion: v2
     appVersion: v1.0.129
-    created: "2024-01-05T09:21:01.884090601Z"
+    created: "2024-01-05T12:56:16.794020945Z"
     dependencies:
     - name: namespace
       repository: file://../namespace
@@ -879,4 +908,4 @@ entries:
     urls:
     - https://cloud-agnost.github.io/charts/base-0.9.228.tgz
     version: 0.9.228
-generated: "2024-01-05T09:21:01.863518577Z"
+generated: "2024-01-05T12:56:16.774300069Z"
