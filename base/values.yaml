@@ -33,7 +33,7 @@ minio:
   mode: standalone
   existingSecret: "minio-credentials"
   persistence:
-    size: 20Gi
+    size: 100Gi
   resources:
     requests:
       memory: 256Mi
