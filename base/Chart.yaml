@@ -17,7 +17,7 @@ dependencies:
 - name: redis
   version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
-- name: minio
+- name: minio-storage
   version: "5.0.14"
   repository: https://charts.min.io
 - name: cert-manager
