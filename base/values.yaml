@@ -28,8 +28,8 @@ cert-manager:
     enabled: false
 
 minio:
-  nameOverride: minio
-  fullnameOverride: minio
+  nameOverride: minio-storage
+  fullnameOverride: minio-storage
   mode: standalone
   existingSecret: "minio-credentials"
   persistence:
