@@ -27,7 +27,7 @@ cert-manager:
   startupapicheck:
     enabled: false
 
-minio-storage:
+minio:
   nameOverride: minio-storage
   fullnameOverride: minio-storage
   mode: standalone
