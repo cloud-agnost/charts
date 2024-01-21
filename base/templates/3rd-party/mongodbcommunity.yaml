@@ -54,8 +54,8 @@ spec:
             - name: mongod
               resources:
                 limits:
-                  cpu: 1000m
-                  memory: 1Gi
+                  cpu: 2000m
+                  memory: 4Gi
                 requests:
                   cpu: 100m
                   memory: 512Mi

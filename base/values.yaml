@@ -48,8 +48,8 @@ minio:
 
 mongodbcommunity:
   storage:
-    dataVolumeSize: 5Gi
-    logVolumeSize: 1Gi
+    dataVolumeSize: 20Gi
+    logVolumeSize: 4Gi
 
 # values for the bitnami redis chart
 redis:
