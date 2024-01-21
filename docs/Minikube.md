@@ -41,7 +41,8 @@ Then run the below commands:
 ```bash
 # Install the chart on Kubernetes:
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.enabled=false
+             --set ingress-nginx.enabled=false \
+             --set minio.mode=standalone --set minio.replicas=1
 ```
 
 Check the pods status, make sure that mongodb, rabbitmq, and redis are running:
