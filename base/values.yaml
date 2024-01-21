@@ -30,10 +30,11 @@ cert-manager:
 minio:
   nameOverride: minio-storage
   fullnameOverride: minio-storage
-  mode: standalone
+  mode: distributed
+  replicas: 4
   existingSecret: "minio-credentials"
   persistence:
-    size: 100Gi
+    size: 50Gi
   resources:
     requests:
       memory: 256Mi
