@@ -18,7 +18,8 @@ GKE does not need extra configuration, just install the chart:
 > In this case, the installation will be performed on the `default` and `operators` namespaces.
 
 ```bash
-helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace
+helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
+             --set minio.mode=distributed --set minio.replicas=4
 ```
 
 Check the pods status, make sure that mongodb, rabbitmq, and redis are running:
