@@ -126,7 +126,7 @@ spec:
             valueFrom:
                secretKeyRef:
                   name: cluster-secrets
-                  key: clusterAcessToken
+                  key: clusterAccessToken
           - name: JWT_SECRET
             valueFrom:
                secretKeyRef:

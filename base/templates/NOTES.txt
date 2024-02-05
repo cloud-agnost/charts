@@ -8,7 +8,7 @@
 💡  You will need "Cluster Access Token" to finalize the cluster set-up through Agnost Studio which is installed in your Kubernetes cluster.
 
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterId.+" | replace "clusterId" "Cluster ID            " }}
-{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAcessToken.+" | replace "clusterAcessToken" "Cluster Access Token  " }}
+{{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "clusterAccessToken.+" | replace "clusterAccessToken" "Cluster Access Token  " }}
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "accessToken.+" | replace "accessToken" "Engine Access Token   " }}
 {{ include (print $.Template.BasePath "/cluster-secrets.yaml") . | regexFind "masterToken.+" | replace "masterToken" "Platform Access Token " }}
 
