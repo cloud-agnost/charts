@@ -1,8 +1,8 @@
 apiVersion: v2
 name: base
 description: Cloud Agnost Applications Installation
-version: 0.9.295
-appVersion: 'v1.0.192'
+version: 0.9.329
+appVersion: 'v1.0.222'
 dependencies:
 - name: namespace
   version: "0.0.1"
@@ -18,7 +18,7 @@ dependencies:
   version: "17.10.2"
   repository: https://charts.bitnami.com/bitnami
 - name: minio
-  version: "5.0.14"
+  version: "5.0.15"
   repository: https://charts.min.io
 - name: cert-manager
   version: "v1.13.3"

@@ -31,6 +31,7 @@ minio:
   nameOverride: minio-storage
   fullnameOverride: minio-storage
   mode: standalone
+  replicas: 1
   existingSecret: "minio-credentials"
   persistence:
     size: 100Gi
@@ -106,7 +107,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "v1.0.58"
+    tag: "v1.0.65"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     hpa:
@@ -123,7 +124,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "v1.0.83"
+    tag: "v1.0.86"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     hpa:
@@ -169,7 +170,7 @@ platform:
 
 studio:
   image: "gcr.io/agnost-community/studio"
-  tag: "v1.0.81"
+  tag: "v1.0.104"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
   hpa:

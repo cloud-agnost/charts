@@ -17,7 +17,8 @@ If you already have docker desktop running and you're using the Kubernetes that 
 ```bash
 # Docker Desktop Kubenetes does not have ingress plugin, so you can install it via the chart:
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.enabled=true
+             --set ingress-nginx.enabled=true \
+             --set minio.mode=standalone --set minio.replicas=1
 ```
 
 Check the pods status, make sure that mongodb, rabbitmq, and redis are running:

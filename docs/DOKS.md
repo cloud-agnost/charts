@@ -19,7 +19,8 @@ Digital Ocean requires an annotation for Ingress, here is how to install it:
 
 ```bash
 helm upgrade --install agnost cloud-agnost/base --namespace agnost --create-namespace \
-             --set ingress-nginx.platform=DOKS
+             --set ingress-nginx.platform=DOKS \
+             --set minio.mode=distributed --set minio.replicas=4
 ```
 
 Check the pods status, make sure that mongodb, rabbitmq, and redis are running:
