@@ -1,64 +1,79 @@
 ingress-nginx:
+  # -- install ingress-nginx
   enabled: true
   controller:
     service:
+      # -- This needs to be local for knative ingress work properly
       externalTrafficPolicy: Local
     autoscaling:
+      # -- Enable/Disable autoscaling for ingress-nginx
       enabled: true
+      # -- Minimum ingress-nginx replicas when autoscaling is enabled
       minReplicas: 1
+      # -- Maximum ingress-nginx replicas when autoscaling is enabled
       maxReplicas: 10
+      # -- Target CPU Utilization for ingress-nginx replicas when autoscaling is enabled
       targetCPUUtilizationPercentage: 80
+      # -- Target Memory Utilization for ingress-nginx replicas when autoscaling is enabled
       targetMemoryUtilizationPercentage: 80
+    # -- resources for the ingress-nginx controller
     resources:
       requests:
         cpu: 100m
         memory: 200Mi
 
-  # Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
+  # -- Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS),
   # Azure Kubernetes Service and Digital Ocean Kubernetes
-  # Possible values:
-  # - AKS
-  # - DOKS
-  # - EKS
+  # Possible values: [ AKS, DOKS, EKS ]
   platform: ""
 
 cert-manager:
+  # -- namespace for cert-manager installation
   namespace: cert-manager
   startupapicheck:
+    # -- no need for pre checks
     enabled: false
 
 minio:
   nameOverride: minio-storage
   fullnameOverride: minio-storage
+  # -- deployment mode: standalone | distributed
   mode: standalone
+  # -- number of replicas. 1 for standalone, 4 for distributed
   replicas: 1
   existingSecret: "minio-credentials"
   persistence:
+    # -- Storage size for MinOP
     size: 100Gi
   resources:
     requests:
+      # -- Memory requests for MinIO pods
       memory: 256Mi
+  # -- Username, password and policy to be assigned to the user
+  # Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
   users: []
-#  ## Username, password and policy to be assigned to the user
-#  ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
 #  - accessKey: appUser
 #    existingSecret: minio-credentials
 #    existingSecretKey: userPassword
 #    policy: readwrite
+  # -- Initial buckets to create
   buckets: []
 
 mongodbcommunity:
   storage:
+    # -- Storage size for data volume
     dataVolumeSize: 20Gi
+    # -- Storage size for logs volume
     logVolumeSize: 4Gi
 
-# values for the bitnami redis chart
 redis:
   nameOverride: redis
   fullnameOverride: redis
   master:
     persistence:
+      # -- Storage size for the redis instance
       size: 2Gi
+  # -- Redis deployment type: standalone | replication
   architecture: standalone
   # this can be set if "architecture: replication"
   #replica:
@@ -73,6 +88,7 @@ engine:
   monitor:
     image: "gcr.io/agnost-community/engine/monitor"
     tag: "v1.0.12"
+    # -- resources for the engine-monitor deployment
     resources: {}
     #  requests:
     #    cpu: '50m'
@@ -85,9 +101,11 @@ engine:
     tag: "v1.0.6"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
+    # -- horizantal pod autoscaler configuration for the engine-realtime deployment
     hpa:
       targetCpuUtilization: 90
     #  targetMemory: '250Mi'
+    # -- resources for the engine-realtime deployment
     resources:
       requests:
         cpu: '100m'
@@ -98,6 +116,7 @@ engine:
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
     tag: "v1.0.9"
+    # -- resources for the engine-scheduler deployment
     resources: {}
       #requests:
       #  cpu: '50m'
@@ -110,9 +129,11 @@ engine:
     tag: "v1.0.65"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
+    # -- horizantal pod autoscaler configuration for the engine-worker deployment
     hpa:
       targetCpuUtilization: 90
     #  targetMemory: '250Mi'
+    # -- resources for the engine-worker deployment
     resources:
       requests:
         cpu: '200m'
@@ -127,9 +148,11 @@ platform:
     tag: "v1.0.86"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
+    # -- horizantal pod autoscaler configuration for the platform-core deployment
     hpa:
       targetCpuUtilization: 90
     #  targetMemory: '250Mi'
+    # -- resources for the platform-core deployment
     resources:
       requests:
         cpu: '200m'
@@ -142,9 +165,11 @@ platform:
     tag: "v1.0.7"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
+    # -- horizantal pod autoscaler configuration for the platform-sync deployment
     hpa:
       targetCpuUtilization: 90
     #  targetMemory: '250Mi'
+    # -- resources for the platform-sync deployment
     resources:
       requests:
         cpu: '100m'
@@ -157,9 +182,11 @@ platform:
     tag: "v1.0.8"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
+    # -- horizantal pod autoscaler configuration for the platform-worker deployment
     hpa:
       targetCpuUtilization: 90
     #  targetMemory: '250Mi'
+    # -- resources for the platform-worker deployment
     resources:
       requests:
         cpu: '50m'
@@ -173,9 +200,11 @@ studio:
   tag: "v1.0.107"
   # You can enable Horizantal Pod Autoscaler for this deployment
   # but it also requires resources to be set
+  # -- horizantal pod autoscaler configuration for the studio deployment
   hpa:
     targetCpuUtilization: 90
   #  targetMemory: '250Mi'
+  # -- resources for the studio deployment
   resources:
     requests:
       cpu: '100m'
