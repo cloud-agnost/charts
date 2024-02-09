@@ -37,7 +37,7 @@ cert-manager:
 minio:
   nameOverride: minio-storage
   fullnameOverride: minio-storage
-  # -- deployment mode: standalone | distributed
+  # -- deployment mode: standalone or distributed
   mode: standalone
   # -- number of replicas. 1 for standalone, 4 for distributed
   replicas: 1
@@ -73,7 +73,7 @@ redis:
     persistence:
       # -- Storage size for the redis instance
       size: 2Gi
-  # -- Redis deployment type: standalone | replication
+  # -- Redis deployment type: standalone or replication
   architecture: standalone
   # this can be set if "architecture: replication"
   #replica:

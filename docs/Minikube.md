@@ -29,6 +29,7 @@ Add the repo and continue with your Kubernetes Platform's documentation:
 
 ```bash
 helm repo add cloud-agnost https://cloud-agnost.github.io/charts
+# if you have already added the Agnost Helm repo, you can update it to the latest versions
 helm repo update
 ```
 
@@ -49,7 +50,7 @@ Check the pods status, make sure that mongodb, rabbitmq, and redis are running:
 It takes around 5 minutes (depending on your local resources and internet connection)
 
 ```bash
-$> kubectl get pods -n agnost
+$> kubectl get pods -n default
 NAME                                           READY   STATUS    RESTARTS      AGE
 engine-monitor-deployment-6d5569878f-nrg7q     1/1     Running   0             8m8s
 engine-realtime-deployment-955f6c77b-2wx52     1/1     Running   0             8m8s
@@ -79,7 +80,7 @@ agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   192.168.49.2   
 kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].ip}'
 ```
 
-Then open your browser and access to the IP address (`http://192.168.49.2` for the given example above)
+Then open your browser and access to the IP address (`http://192.168.49.2/studio` for the given example above) or go to `http://localhost/studio` to launch Agnost Studio.
 
 ## Chart Customization
 
@@ -127,7 +128,7 @@ Here are the values you can configure:
 | ingress-nginx.platform | string | `""` | Platform running the ingress, annotations needed for Elastic Kubernetes Service (AWS), Azure Kubernetes Service and Digital Ocean Kubernetes Possible values: [ AKS, DOKS, EKS ] |
 | cert-manager.namespace | string | `"cert-manager"` | namespace for cert-manager installation |
 | cert-manager.startupapicheck.enabled | bool | `false` | no need for pre checks |
-| minio.mode | string | `"standalone"` | deployment mode: standalone | distributed |
+| minio.mode | string | `"standalone"` | deployment mode: standalone or distributed |
 | minio.replicas | int | `1` | number of replicas. 1 for standalone, 4 for distributed |
 | minio.persistence.size | string | `"100Gi"` | Storage size for MinOP |
 | minio.resources.requests.memory | string | `"256Mi"` | Memory requests for MinIO pods |
@@ -136,7 +137,7 @@ Here are the values you can configure:
 | mongodbcommunity.storage.dataVolumeSize | string | `"20Gi"` | Storage size for data volume |
 | mongodbcommunity.storage.logVolumeSize | string | `"4Gi"` | Storage size for logs volume |
 | redis.master.persistence.size | string | `"2Gi"` | Storage size for the redis instance |
-| redis.architecture | string | `"standalone"` | Redis deployment type: standalone | replication |
+| redis.architecture | string | `"standalone"` | Redis deployment type: standalone or replication |
 | engine.monitor.resources | object | `{}` | resources for the engine-monitor deployment |
 | engine.realtime.hpa | object | `{"targetCpuUtilization":90}` | horizantal pod autoscaler configuration for the engine-realtime deployment |
 | engine.realtime.resources | object | `{"requests":{"cpu":"100m"}}` | resources for the engine-realtime deployment |
