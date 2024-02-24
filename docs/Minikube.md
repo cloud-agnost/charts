@@ -1,26 +1,16 @@
 # Minikube
 
 ## Minikube Configuration
-On minikube, if you haven't done already, you need to enable ingress, volumesnapshots, and csi-hostpath-driver addons:
+On Minikube, if you haven't done so already, you need to enable ingress, volumesnapshots, and csi-hostpath-driver addons:
 
 ```bash
-minikube start --cpus=4 --memory 8192
-## output:
-#...
-#🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
-minikube addons enable ingress
-## output:
-#...
-#🔎  Verifying ingress addon...
-#🌟  The 'ingress' addon is enabled
-
-minikube addons enable volumesnapshots
-minikube addons enable csi-hostpath-driver
+minikube start --cpus=4 --memory=8192 --addons=ingress,volumesnapshots,csi-hostpath-driver
 
 minikube addons disable storage-provisioner
 minikube addons disable default-storageclass
 
-kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}, "allowVolumeExpansion":true}'
+kubectl patch storageclass csi-hostpath-sc \
+  -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}, "allowVolumeExpansion":true}'
 ```
 
 ## Chart installation
@@ -80,7 +70,7 @@ agnost-ingress-nginx-controller   LoadBalancer   10.245.185.76   192.168.49.2   
 kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingress[].ip}'
 ```
 
-Then open your browser and access to the IP address (`http://192.168.49.2/studio` for the given example above) or go to `http://localhost/studio` to launch Agnost Studio.
+Then open your browser and access the IP address (`http://192.168.49.2/studio` for the given example above) or go to `http://localhost/studio` to launch Agnost Studio.
 
 ## Chart Customization
 
