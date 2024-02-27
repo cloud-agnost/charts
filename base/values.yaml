@@ -87,7 +87,7 @@ redis:
 engine:
   monitor:
     image: "gcr.io/agnost-community/engine/monitor"
-    tag: "v1.1.0"
+    tag: "v1.1.1"
     # -- resources for the engine-monitor deployment
     resources: {}
     #  requests:
@@ -115,7 +115,7 @@ engine:
       #  memory: '2Gi'
   scheduler:
     image: "gcr.io/agnost-community/engine/scheduler"
-    tag: "v1.1.0"
+    tag: "v1.1.1"
     # -- resources for the engine-scheduler deployment
     resources: {}
       #requests:
@@ -126,7 +126,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "v1.1.0"
+    tag: "v1.1.1"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the engine-worker deployment
@@ -145,7 +145,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "v1.1.0"
+    tag: "v1.1.1"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the platform-core deployment
