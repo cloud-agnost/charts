@@ -72,6 +72,13 @@ kubectl get svc -n ingress-nginx -o jsonpath='{.items[].status.loadBalancer.ingr
 
 Then open your browser and access the IP address (`http://192.168.49.2/studio` for the given example above) or go to `http://localhost/studio` to launch Agnost Studio.
 
+> [!IMPORTANT]
+> If you get `too many open files` errors in your containers while running Minikube on Linux, try these commands:
+> ```bash
+>  sudo sysctl fs.inotify.max_user_instances=1280
+>  sudo sysctl fs.inotify.max_user_watches=655360
+> ```
+
 ## Chart Customization
 
 Here is the [helm documentation](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing) in how to customize the installation.
