@@ -179,7 +179,7 @@ platform:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/platform/worker"
-    tag: "v1.1.1"
+    tag: "v1.1.2"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the platform-worker deployment
