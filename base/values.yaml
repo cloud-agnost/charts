@@ -98,7 +98,7 @@ engine:
     #    memory: '2Gi'
   realtime:
     image: "gcr.io/agnost-community/engine/realtime"
-    tag: "v1.2.0"
+    tag: "v1.2.1"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the engine-realtime deployment
