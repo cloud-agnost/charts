@@ -70,19 +70,43 @@ redis:
   nameOverride: redis
   fullnameOverride: redis
   master:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      limits:
+        cpu: 500m
+        memory: 2Gi
     persistence:
       # -- Storage size for the redis instance
-      size: 2Gi
+      size: 4Gi
   # -- Redis deployment type: standalone or replication
   architecture: standalone
   # this can be set if "architecture: replication"
   #replica:
+  #  resources:
+  #    requests:
+  #      cpu: 100m
+  #      memory: 250Mi
+  #    limits:
+  #      cpu: 500m
+  #      memory: 2Gi
   #  replicaCount: 1
   #  persistence:
-  #    size: 2Gi
+  #    size: 4Gi
   auth:
     existingSecret: redis-password
     existingSecretPasswordKey: password
+  commonConfiguration: |-
+    # Enable AOF https://redis.io/topics/persistence#append-only-file
+    appendonly yes
+    # Enable RDB
+    # "save 900 1" means save the dataset to disk if at least 1 key has been changed and 900 seconds (15 minutes) have elapsed since the last save.
+    # "save 300 10" means save the dataset to disk if at least 10 keys have been changed and 300 seconds (5 minutes) have elapsed since the last save.
+    # "save 60 10000" means save the dataset to disk if at least 10000 keys have been changed and 60 seconds (1 minute) have elapsed since the last save.
+    save 900 1
+    save 300 10
+    save 60 10000
 
 engine:
   monitor:
