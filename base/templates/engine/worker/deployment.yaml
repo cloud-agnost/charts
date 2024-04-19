@@ -136,6 +136,26 @@ spec:
             value: {{ .Release.Namespace }}
           - name: RELEASE_NUMBER
             value: {{ .Chart.AppVersion }}
+          - name: MINIO_ENDPOINT
+            valueFrom:
+              secretKeyRef:
+                name: minio-credentials
+                key: endpoint
+          - name: MINIO_PORT
+            valueFrom:
+              secretKeyRef:
+                name: minio-credentials
+                key: port
+          - name: MINIO_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-credentials
+                key: rootUser
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-credentials
+                key: rootPassword
         livenessProbe:
           httpGet:
             path: /health
