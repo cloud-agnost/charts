@@ -31,10 +31,54 @@ Example:
 
 ```bash
 # you can access to the database from `localhost:27017` after running this:
-kubectl port-forward mongodb-0 -n agnost 27017:27017
+kubectl port-forward mongodb-0 27017:27017 -n <NAMESPACE>
 ```
 
-Similar can be done for redis, rabbitmq, and other services.
+Similar can be done for redis, rabbitmq, and other services:
+
+> [!WARNING]
+>
+> Below commands run on the default namespace, if you installed the chart to other namespace, then you should add `-n <NAMESPACE>`
+
+### MinIO Console
+
+```bash
+# http://localhost:9001
+kubectl port-forward svc/minio-storage-console 9001:9001
+
+# username:
+kubectl get secret minio-credentials -o jsonpath='{.data.rootUser}' | base64 -d
+
+# password:
+kubectl get secret minio-credentials -o jsonpath='{.data.rootPassword}' | base64 -d
+```
+
+### RabbitMQ
+
+```bash
+# http://localhost:15672
+kubectl port-forward svc/rabbitmq 15672:15672
+
+# username
+kubectl get secret rabbitmq-default-user -o jsonpath='{.data.username}' | base64 -d
+
+# password
+kubectl get secret rabbitmq-default-user -o jsonpath='{.data.password}' | base64 -d
+```
+
+### Zot Registry
+
+```bash
+# http://localhost:5000
+kubectl port-forward svc/local-registry 5000:5000
+```
+
+### Tekton Pipelines
+
+```bash
+# http://localhost:9097/#/taskruns
+kubectl port-forward svc/tekton-dashboard -n tekton-pipelines 9097:9097
+```
 
 More information can be found [here](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
 
