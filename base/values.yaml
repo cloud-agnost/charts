@@ -150,7 +150,7 @@ engine:
       #  memory: '2Gi'
   worker:
     image: "gcr.io/agnost-community/engine/worker"
-    tag: "v1.2.11"
+    tag: "v1.2.12"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the engine-worker deployment
@@ -169,7 +169,7 @@ engine:
 platform:
   core:
     image: "gcr.io/agnost-community/platform/core"
-    tag: "v1.2.14"
+    tag: "v1.2.15"
     # You can enable Horizantal Pod Autoscaler for this deployment
     # but it also requires resources to be set
     # -- horizantal pod autoscaler configuration for the platform-core deployment
